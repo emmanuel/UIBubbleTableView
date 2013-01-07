@@ -97,35 +97,50 @@
 - (void)keyboardWasShown:(NSNotification*)aNotification
 {
     NSDictionary* info = [aNotification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    CGFloat keyboardHeight = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
+    double duration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    NSInteger animationCurve = [[info objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
+    NSInteger options = UIViewAnimationOptionBeginFromCurrentState | animationCurve;
 
-    [UIView animateWithDuration:0.2f animations:^{
-        
+    // TODO: Need to translate the bounds to account for rotation (correct?)
+    
+    [UIView animateWithDuration:duration delay:0 options:options animations:^{
         CGRect frame = textInputView.frame;
-        frame.origin.y -= kbSize.height;
+        frame.origin.y -= keyboardHeight;
         textInputView.frame = frame;
         
-        frame = bubbleTable.frame;
-        frame.size.height -= kbSize.height;
-        bubbleTable.frame = frame;
-    }];
+        frame = self.bubbleTable.frame;
+        // TODO: keep the bottom of the visible area of the bubble table in view as the keyboard slides up
+        // One solution is to leave the origin unchanged and animate the bubble table height
+        // while scrolling in sync.
+        // Another option is to animate the origin (subtract). Then, change the origin (add),
+        // height (subtract) and scroll position (add) with no animation in the completion block
+        // Yet another option is to fix UIBubbleTable to pass along scroll-related messages
+        // and then to resignFirstResponder as soon as bubbleTable begins scrolling.
+        // Alternately examine:
+        //   https://github.com/StephenAsherson/FlippedTableView
+        frame.size.height -= keyboardHeight;
+        self.bubbleTable.frame = frame;
+    } completion:nil];
 }
 
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 {
     NSDictionary* info = [aNotification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
-    [UIView animateWithDuration:0.2f animations:^{
-        
+    CGFloat keyboardHeight = [info[UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
+    double duration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    NSInteger animationCurve = [[info objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
+    NSInteger options = UIViewAnimationOptionBeginFromCurrentState | animationCurve;
+
+    [UIView animateWithDuration:duration delay:0 options:options animations:^{
         CGRect frame = textInputView.frame;
-        frame.origin.y += kbSize.height;
+        frame.origin.y += keyboardHeight;
         textInputView.frame = frame;
         
-        frame = bubbleTable.frame;
-        frame.size.height += kbSize.height;
-        bubbleTable.frame = frame;
-    }];
+        frame = self.bubbleTable.frame;
+        frame.size.height += keyboardHeight;
+        self.bubbleTable.frame = frame;
+    } completion:nil];
 }
 
 #pragma mark - Actions
