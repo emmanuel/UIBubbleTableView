@@ -28,6 +28,11 @@
     NSMutableArray *bubbleData;
 }
 
+@property (nonatomic, weak) IBOutlet UIBubbleTableView *bubbleTable;
+
+- (void)scrollToLastBubbleAnimated:(BOOL)animated;
+- (NSIndexPath *)indexPathForLastBubble;
+
 @end
 
 @implementation ViewController
@@ -140,7 +145,9 @@
         frame = self.bubbleTable.frame;
         frame.size.height += keyboardHeight;
         self.bubbleTable.frame = frame;
-    } completion:nil];
+    } completion:^(BOOL finished) {
+        [self scrollToLastBubbleAnimated:YES];
+    }];
 }
 
 #pragma mark - Actions
@@ -155,6 +162,22 @@
     
     textField.text = @"";
     [textField resignFirstResponder];
+}
+
+#pragma mark Helpers
+
+- (void)scrollToLastBubbleAnimated:(BOOL)animated
+{
+    [self.bubbleTable scrollToRowAtIndexPath:[self indexPathForLastBubble]
+                            atScrollPosition:UITableViewScrollPositionBottom
+                                    animated:animated];
+}
+
+-(NSIndexPath *)indexPathForLastBubble
+{
+    NSInteger finalSection = [self.bubbleTable numberOfSections] - 1;
+    NSInteger finalRow = [self.bubbleTable numberOfRowsInSection:finalSection] - 1;
+    return [NSIndexPath indexPathForRow:finalRow inSection:finalSection];
 }
 
 @end
