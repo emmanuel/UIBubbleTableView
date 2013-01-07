@@ -41,6 +41,8 @@
 
 const UIEdgeInsets textInsetsMine = {5, 10, 11, 17};
 const UIEdgeInsets textInsetsSomeone = {5, 15, 11, 10};
+const NSInteger kMaxContentWidth = 200;
+const NSInteger kMaxContentHeight = 9999;
 
 + (id)dataWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type
 {
@@ -55,8 +57,10 @@ const UIEdgeInsets textInsetsSomeone = {5, 15, 11, 10};
 {
     if (!text) text = @"";
     UIFont *font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
-    CGSize size = [text sizeWithFont:font constrainedToSize:CGSizeMake(220, 9999) lineBreakMode:UILineBreakModeWordWrap];
-    
+    CGSize size = [text sizeWithFont:font
+                   constrainedToSize:CGSizeMake(kMaxContentWidth, kMaxContentHeight)
+                       lineBreakMode:UILineBreakModeWordWrap];
+
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
     label.numberOfLines = 0;
     label.lineBreakMode = UILineBreakModeWordWrap;
@@ -89,18 +93,17 @@ const UIEdgeInsets imageInsetsSomeone = {11, 18, 16, 14};
 - (id)initWithImage:(UIImage *)image date:(NSDate *)date type:(NSBubbleType)type
 {
     CGSize size = image.size;
-    if (size.width > 220)
+    if (size.width > kMaxContentWidth)
     {
-        size.height /= (size.width / 220);
-        size.width = 220;
+        size.height /= (size.width / kMaxContentWidth);
+        size.width = kMaxContentWidth;
     }
-    
+
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
     imageView.image = image;
     imageView.layer.cornerRadius = 5.0;
     imageView.layer.masksToBounds = YES;
 
-    
 #if !__has_feature(objc_arc)
     [imageView autorelease];
 #endif
