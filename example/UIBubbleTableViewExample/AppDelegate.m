@@ -28,12 +28,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-#if !__has_feature(objc_arc)
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    self.viewController = [[[ViewController alloc] initWithNibName:@"ViewController" bundle:nil] autorelease];
-#else
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
+#if !__has_feature(objc_arc)
+    [self.window autorelease];
+    [self.viewController autorelease];
 #endif
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];

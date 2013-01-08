@@ -59,14 +59,13 @@
     
     if (!self.bubbleImage)
     {
+        self.bubbleImage = [[UIImageView alloc] init];
 #if !__has_feature(objc_arc)
-        self.bubbleImage = [[[UIImageView alloc] init] autorelease];
-#else
-        self.bubbleImage = [[UIImageView alloc] init];        
+        [self.bubbleImage autorelease];
 #endif
         [self addSubview:self.bubbleImage];
     }
-    
+
     NSBubbleType type = self.data.type;
     
     CGFloat width = self.data.view.frame.size.width;
@@ -79,10 +78,9 @@
     if (self.showAvatar)
     {
         [self.avatarImage removeFromSuperview];
-#if !__has_feature(objc_arc)
-        self.avatarImage = [[[UIImageView alloc] initWithImage:(self.data.avatar ? self.data.avatar : [UIImage imageNamed:@"missingAvatar.png"])] autorelease];
-#else
         self.avatarImage = [[UIImageView alloc] initWithImage:(self.data.avatar ? self.data.avatar : [UIImage imageNamed:@"missingAvatar.png"])];
+#if !__has_feature(objc_arc)
+        [self.avatarImage autorelease];
 #endif
         self.avatarImage.layer.cornerRadius = 9.0;
         self.avatarImage.layer.masksToBounds = YES;

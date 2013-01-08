@@ -96,20 +96,18 @@
     
     // Loading new data
     int count = 0;
-#if !__has_feature(objc_arc)
-    self.bubbleSection = [[[NSMutableArray alloc] init] autorelease];
-#else
     self.bubbleSection = [[NSMutableArray alloc] init];
+#if !__has_feature(objc_arc)
+    [self.bubbleSection autorelease];
 #endif
-    
+
     if (self.bubbleDataSource && (count = [self.bubbleDataSource numberOfRowsForBubbleTableView:self]) > 0)
     {
-#if !__has_feature(objc_arc)
-        NSMutableArray *bubbleData = [[[NSMutableArray alloc] initWithCapacity:count] autorelease];
-#else
         NSMutableArray *bubbleData = [[NSMutableArray alloc] initWithCapacity:count];
+#if !__has_feature(objc_arc)
+        [bubbleData autorelease];
 #endif
-        
+
         for (int i = 0; i < count; i++)
         {
             NSObject *object = [self.bubbleDataSource bubbleTableView:self dataForRow:i];
@@ -134,10 +132,9 @@
             
             if ([data.date timeIntervalSinceDate:last] > self.snapInterval)
             {
-#if !__has_feature(objc_arc)
-                currentSection = [[[NSMutableArray alloc] init] autorelease];
-#else
                 currentSection = [[NSMutableArray alloc] init];
+#if !__has_feature(objc_arc)
+                [currentSection autorelease];
 #endif
                 [self.bubbleSection addObject:currentSection];
             }
@@ -151,6 +148,8 @@
 }
 
 #pragma mark - UITableViewDelegate implementation
+
+
 
 #pragma mark - UITableViewDataSource implementation
 

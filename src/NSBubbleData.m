@@ -128,12 +128,11 @@ const UIEdgeInsets imageInsetsSomeone = {11, 18, 16, 14};
     self = [super init];
     if (self)
     {
-#if !__has_feature(objc_arc)
-        _view = [view retain];
-        _date = [date retain];
-#else
         _view = view;
         _date = date;
+#if !__has_feature(objc_arc)
+        [view retain];
+        [date retain];
 #endif
         _type = type;
         _insets = insets;
