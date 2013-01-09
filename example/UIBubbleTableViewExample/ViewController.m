@@ -39,6 +39,8 @@
 
 - (void)viewDidLoad
 {
+    [[UIBubbleTableView appearance] setBackgroundColor:[UIColor lightGrayColor]];
+
     [super viewDidLoad];
     
     NSBubbleData *heyBubble = [NSBubbleData dataWithText:@"Hey, halloween is soon" date:[NSDate dateWithTimeIntervalSinceNow:-300] type:BubbleTypeSomeoneElse];

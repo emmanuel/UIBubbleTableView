@@ -30,8 +30,6 @@
     self.adapter = [self createAdapter];
     // UITableView properties
     assert(self.style == UITableViewStylePlain);
-    self.backgroundColor = [UIColor clearColor];
-    self.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 - (id)init
@@ -61,6 +59,61 @@
     if (self) [self initializator];
     return self;
 }
+
+#pragma mark - UIAppearance implementations
+
+@dynamic backgroundColor;
+@dynamic separatorStyle;
+//@dynamic showsVerticalScrollIndicator;
+//@dynamic showsHorizontalScrollIndicator;
+
++ (void)load
+{
+    [[self appearance] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    //    [[self appearance] setBackgroundColor:[UIColor clearColor]];
+    //    [[self appearance] setShowsHorizontalScrollIndicator:NO];
+    //    [[self appearance] setShowsVerticalScrollIndicator:NO];
+}
+
+- (UITableViewCellSeparatorStyle)separatorStyle
+{
+    return [super separatorStyle];
+}
+
+- (void)setSeparatorStyle:(UITableViewCellSeparatorStyle)separatorStyle
+{
+    [super setSeparatorStyle:separatorStyle];
+}
+
+- (UIColor *)backgroundColor
+{
+    return [super backgroundColor];
+}
+
+- (void)setBackgroundColor:(UIColor *)backgroundColor
+{
+    [super setBackgroundColor:backgroundColor];
+}
+
+//- (BOOL)showsVerticalScrollIndicator
+//{
+//    return [super showsHorizontalScrollIndicator];
+//}
+
+//- (void)setShowsVerticalScrollIndicator:(BOOL)showsHorizontalScrollIndicator
+//{
+//    [super setShowsHorizontalScrollIndicator:showsHorizontalScrollIndicator];
+//}
+
+//- (BOOL)showsHorizontalScrollIndicator
+//{
+//    return [super showsHorizontalScrollIndicator];
+//}
+
+//- (void)setShowsHorizontalScrollIndicator:(BOOL)showsHorizontalScrollIndicator
+//{
+//    [super setShowsHorizontalScrollIndicator:showsHorizontalScrollIndicator];
+//}
 
 #pragma mark - Override
 

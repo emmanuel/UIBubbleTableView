@@ -26,4 +26,11 @@
 @property (nonatomic) BOOL showAvatars;
 @property (nonatomic) NSBubbleTypingType typingBubble;
 
+#pragma mark UIAppearanceContainerProtocol hooks
+
+@property (nonatomic, strong) UIColor *backgroundColor UI_APPEARANCE_SELECTOR;
+@property (nonatomic) UITableViewCellSeparatorStyle separatorStyle UI_APPEARANCE_SELECTOR;
+//@property (nonatomic) BOOL showsVerticalScrollIndicator UI_APPEARANCE_SELECTOR;
+//@property (nonatomic) BOOL showsHorizontalScrollIndicator UI_APPEARANCE_SELECTOR;
+
 @end
