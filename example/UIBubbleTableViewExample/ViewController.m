@@ -51,18 +51,19 @@
     replyBubble.avatar = nil;
     
     bubbleData = [[NSMutableArray alloc] initWithObjects:heyBubble, photoBubble, replyBubble, nil];
-    bubbleTable.bubbleDataSource = self;
-    
+
+    self.bubbleTable.bubbleDataSource = self;
+
     // The line below sets the snap interval in seconds. This defines how the bubbles will be grouped in time.
     // Interval of 120 means that if the next messages comes in 2 minutes since the last message, it will be added into the same group.
     // Groups are delimited with header which contains date and time for the first message in the group.
     
-    bubbleTable.snapInterval = 120;
+    self.bubbleTable.snapInterval = 120;
     
     // The line below enables avatar support. Avatar can be specified for each bubble with .avatar property of NSBubbleData.
     // Avatars are enabled for the whole table at once. If particular NSBubbleData misses the avatar, a default placeholder will be set (missingAvatar.png)
-    
-    bubbleTable.showAvatars = YES;
+
+    self.bubbleTable.showAvatars = YES;
     
     // Uncomment the line below to add "Now typing" bubble
     // Possible values are
@@ -70,9 +71,9 @@
     //    - NSBubbleTypingTypeMe - shows "now typing" bubble on the right
     //    - NSBubbleTypingTypeNone - no "now typing" bubble
     
-    bubbleTable.typingBubble = NSBubbleTypingTypeSomebody;
+    self.bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
     
-    [bubbleTable reloadData];
+    [self.bubbleTable reloadData];
     
     // Keyboard events
     
@@ -154,12 +155,12 @@
 
 - (IBAction)sayPressed:(id)sender
 {
-    bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
+    self.bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
 
     NSBubbleData *sayBubble = [NSBubbleData dataWithText:textField.text date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
     [bubbleData addObject:sayBubble];
-    [bubbleTable reloadData];
-    
+    [self.bubbleTable reloadData];
+
     textField.text = @"";
     [textField resignFirstResponder];
 }
