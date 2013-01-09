@@ -17,33 +17,21 @@
 
 @property (nonatomic, retain) NSMutableArray *bubbleSection;
 
+- (id<UITableViewDelegate, UITableViewDataSource, SGBubbleTableViewAdapterProtocol>)createAdapter;
+
 @end
 
 @implementation UIBubbleTableView
-
-@synthesize bubbleDataSource = _bubbleDataSource;
-@synthesize snapInterval = _snapInterval;
-@synthesize bubbleSection = _bubbleSection;
-@synthesize typingBubble = _typingBubble;
-@synthesize showAvatars = _showAvatars;
 
 #pragma mark - Initializators
 
 - (void)initializator
 {
+    self.adapter = [self createAdapter];
     // UITableView properties
-    
+    assert(self.style == UITableViewStylePlain);
     self.backgroundColor = [UIColor clearColor];
     self.separatorStyle = UITableViewCellSeparatorStyleNone;
-    assert(self.style == UITableViewStylePlain);
-    
-    self.delegate = self;
-    self.dataSource = self;
-    
-    // UIBubbleTableView default properties
-    
-    self.snapInterval = 120;
-    self.typingBubble = NSBubbleTypingTypeNobody;
 }
 
 - (id)init
@@ -74,159 +62,84 @@
     return self;
 }
 
-#if !__has_feature(objc_arc)
-- (void)dealloc
-{
-    [_bubbleSection release];
-	_bubbleSection = nil;
-	_bubbleDataSource = nil;
-    [super dealloc];
-}
-#endif
-
 #pragma mark - Override
+
+@dynamic bubbleDataSource;
+@dynamic snapInterval;
+@dynamic showAvatars;
+@dynamic typingBubble;
 
 - (void)reloadData
 {
-    self.showsVerticalScrollIndicator = NO;
-    self.showsHorizontalScrollIndicator = NO;
-    
-    // Cleaning up
-	self.bubbleSection = nil;
-    
-    // Loading new data
-    int count = 0;
-    self.bubbleSection = [[NSMutableArray alloc] init];
-#if !__has_feature(objc_arc)
-    [self.bubbleSection autorelease];
-#endif
-
-    if (self.bubbleDataSource && (count = [self.bubbleDataSource numberOfRowsForBubbleTableView:self]) > 0)
-    {
-        NSMutableArray *bubbleData = [[NSMutableArray alloc] initWithCapacity:count];
-#if !__has_feature(objc_arc)
-        [bubbleData autorelease];
-#endif
-
-        for (int i = 0; i < count; i++)
-        {
-            NSObject *object = [self.bubbleDataSource bubbleTableView:self dataForRow:i];
-            assert([object isKindOfClass:[NSBubbleData class]]);
-            [bubbleData addObject:object];
-        }
-        
-        [bubbleData sortUsingComparator:^NSComparisonResult(id obj1, id obj2)
-         {
-             NSBubbleData *bubbleData1 = (NSBubbleData *)obj1;
-             NSBubbleData *bubbleData2 = (NSBubbleData *)obj2;
-             
-             return [bubbleData1.date compare:bubbleData2.date];            
-         }];
-        
-        NSDate *last = [NSDate dateWithTimeIntervalSince1970:0];
-        NSMutableArray *currentSection = nil;
-        
-        for (int i = 0; i < count; i++)
-        {
-            NSBubbleData *data = (NSBubbleData *)[bubbleData objectAtIndex:i];
-            
-            if ([data.date timeIntervalSinceDate:last] > self.snapInterval)
-            {
-                currentSection = [[NSMutableArray alloc] init];
-#if !__has_feature(objc_arc)
-                [currentSection autorelease];
-#endif
-                [self.bubbleSection addObject:currentSection];
-            }
-            
-            [currentSection addObject:data];
-            last = data.date;
-        }
-    }
-    
+    [self.adapter willReloadData];
     [super reloadData];
 }
 
-#pragma mark - UITableViewDelegate implementation
-
-
-
-#pragma mark - UITableViewDataSource implementation
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (void)setDelegate:(id<UITableViewDelegate>)delegate
 {
-    int result = [self.bubbleSection count];
-    if (self.typingBubble != NSBubbleTypingTypeNobody) result++;
-    return result;
+    [self.adapter setDelegate:delegate];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (void)setAdapter:(id<UITableViewDelegate, UITableViewDataSource, SGBubbleTableViewAdapterProtocol>)adapter
 {
-    // This is for now typing bubble
-	if (section >= [self.bubbleSection count]) return 1;
-    
-    return [[self.bubbleSection objectAtIndex:section] count] + 1;
+    _adapter = adapter;
+    [super setDelegate:adapter];
+    self.dataSource = adapter;
 }
 
-- (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (id)forwardingTargetForSelector:(SEL)aSelector
 {
-    // Now typing
-	if (indexPath.section >= [self.bubbleSection count])
+    if ((aSelector == @selector(bubbleDataSource)) || (aSelector == @selector(setBubbleDataSource:)))
     {
-        return MAX([UIBubbleTypingTableViewCell height], self.showAvatars ? 52 : 0);
+        return self.adapter;
     }
-    
-    // Header
-    if (indexPath.row == 0)
+    else if ((aSelector == @selector(snapInterval)) || (aSelector == @selector(setSnapInterval:)))
     {
-        return [UIBubbleHeaderTableViewCell height];
+        return self.adapter;
     }
-    
-    NSBubbleData *data = [[self.bubbleSection objectAtIndex:indexPath.section] objectAtIndex:indexPath.row - 1];
-    return MAX(data.insets.top + data.view.frame.size.height + data.insets.bottom, self.showAvatars ? 52 : 0);
+    else if ((aSelector == @selector(showAvatars)) || (aSelector == @selector(setShowAvatars:)))
+    {
+        return self.adapter;
+    }
+    else if ((aSelector == @selector(typingBubble)) || (aSelector == @selector(setTypingBubble:)))
+    {
+        return self.adapter;
+    }
+    else
+    {
+        return [super forwardingTargetForSelector:aSelector];
+    }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (BOOL)respondsToSelector:(SEL)aSelector
 {
-    // Now typing
-	if (indexPath.section >= [self.bubbleSection count])
+    if ((aSelector == @selector(bubbleDataSource)) || (aSelector == @selector(setBubbleDataSource:)))
     {
-        static NSString *cellId = @"tblBubbleTypingCell";
-        UIBubbleTypingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-        
-        if (cell == nil) cell = [[UIBubbleTypingTableViewCell alloc] init];
-
-        cell.type = self.typingBubble;
-        cell.showAvatar = self.showAvatars;
-        
-        return cell;
+        return YES;
     }
-
-    // Header with date and time
-    if (indexPath.row == 0)
+    else if ((aSelector == @selector(snapInterval)) || (aSelector == @selector(setSnapInterval:)))
     {
-        static NSString *cellId = @"tblBubbleHeaderCell";
-        UIBubbleHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-        NSBubbleData *data = [[self.bubbleSection objectAtIndex:indexPath.section] objectAtIndex:0];
-        
-        if (cell == nil) cell = [[UIBubbleHeaderTableViewCell alloc] init];
-
-        cell.date = data.date;
-       
-        return cell;
+        return YES;
     }
-    
-    // Standard bubble    
-    static NSString *cellId = @"tblBubbleCell";
-    UIBubbleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    NSBubbleData *data = [[self.bubbleSection objectAtIndex:indexPath.section] objectAtIndex:indexPath.row - 1];
-    
-    if (cell == nil) cell = [[UIBubbleTableViewCell alloc] init];
-    
-    cell.data = data;
-    cell.showAvatar = self.showAvatars;
-    
-    return cell;
+    else if ((aSelector == @selector(showAvatars)) || (aSelector == @selector(setShowAvatars:)))
+    {
+        return YES;
+    }
+    else if ((aSelector == @selector(typingBubble)) || (aSelector == @selector(setTypingBubble:)))
+    {
+        return YES;
+    }
+    else
+    {
+        return [super respondsToSelector:aSelector];
+    }
+}
+
+#pragma mark - Helpers
+
+- (id<UITableViewDelegate, UITableViewDataSource, SGBubbleTableViewAdapterProtocol>)createAdapter
+{
+    return [[SGBubbleTableViewAdapter alloc] initWithBubbleTableView:self];
 }
 
 @end

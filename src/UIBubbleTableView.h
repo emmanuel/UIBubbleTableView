@@ -9,22 +9,21 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SGBubbleTableViewAdapter.h"
 #import "UIBubbleTableViewDataSource.h"
 #import "UIBubbleTableViewCell.h"
 
-typedef enum _NSBubbleTypingType
-{
-    NSBubbleTypingTypeNobody = 0,
-    NSBubbleTypingTypeMe = 1,
-    NSBubbleTypingTypeSomebody = 2
-} NSBubbleTypingType;
 
-@interface UIBubbleTableView : UITableView <UITableViewDelegate, UITableViewDataSource>
+@interface UIBubbleTableView : UITableView
 
-@property (nonatomic, assign) IBOutlet id<UIBubbleTableViewDataSource> bubbleDataSource;
+@property (nonatomic, strong) id<UITableViewDelegate, UITableViewDataSource, SGBubbleTableViewAdapterProtocol> adapter;
+
+#pragma mark Compiler hints
+
+@property (nonatomic, assign) id<UIBubbleTableViewDataSource> bubbleDataSource;
+
 @property (nonatomic) NSTimeInterval snapInterval;
-@property (nonatomic) NSBubbleTypingType typingBubble;
 @property (nonatomic) BOOL showAvatars;
+@property (nonatomic) NSBubbleTypingType typingBubble;
 
 @end

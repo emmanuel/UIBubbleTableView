@@ -11,6 +11,6 @@
 #import <UIKit/UIKit.h>
 #import "UIBubbleTableViewDataSource.h"
 
-@interface ViewController : UIViewController <UIBubbleTableViewDataSource>
+@interface ViewController : UIViewController <UITableViewDelegate, UIBubbleTableViewDataSource>
 
 @end

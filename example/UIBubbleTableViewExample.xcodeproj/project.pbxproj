@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		148B2D66169C39B5005C6E24 /* SGBubbleTableViewAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 148B2D65169C39B5005C6E24 /* SGBubbleTableViewAdapter.m */; };
 		76687AFD1622039C00707588 /* UIBubbleTypingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76687AFC1622039C00707588 /* UIBubbleTypingTableViewCell.m */; };
 		76687AFF162203AF00707588 /* halloween.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 76687AFE162203AF00707588 /* halloween.jpg */; };
 		76D097CC1621F0E000C17816 /* UIBubbleHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D097CB1621F0E000C17816 /* UIBubbleHeaderTableViewCell.m */; };
@@ -37,6 +38,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		148B2D64169C39B5005C6E24 /* SGBubbleTableViewAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGBubbleTableViewAdapter.h; path = ../../src/SGBubbleTableViewAdapter.h; sourceTree = "<group>"; };
+		148B2D65169C39B5005C6E24 /* SGBubbleTableViewAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGBubbleTableViewAdapter.m; path = ../../src/SGBubbleTableViewAdapter.m; sourceTree = "<group>"; };
+		148B2D82169E2489005C6E24 /* SGBubbleTableViewAdapterProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGBubbleTableViewAdapterProtocol.h; path = ../../src/SGBubbleTableViewAdapterProtocol.h; sourceTree = "<group>"; };
 		76687AFB1622039C00707588 /* UIBubbleTypingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIBubbleTypingTableViewCell.h; path = ../../src/UIBubbleTypingTableViewCell.h; sourceTree = "<group>"; };
 		76687AFC1622039C00707588 /* UIBubbleTypingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIBubbleTypingTableViewCell.m; path = ../../src/UIBubbleTypingTableViewCell.m; sourceTree = "<group>"; };
 		76687AFE162203AF00707588 /* halloween.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = halloween.jpg; sourceTree = SOURCE_ROOT; };
@@ -162,6 +166,9 @@
 				76687AFB1622039C00707588 /* UIBubbleTypingTableViewCell.h */,
 				76687AFC1622039C00707588 /* UIBubbleTypingTableViewCell.m */,
 				76ED208815BF0B4400E186D3 /* UIBubbleTableViewDataSource.h */,
+				148B2D64169C39B5005C6E24 /* SGBubbleTableViewAdapter.h */,
+				148B2D65169C39B5005C6E24 /* SGBubbleTableViewAdapter.m */,
+				148B2D82169E2489005C6E24 /* SGBubbleTableViewAdapterProtocol.h */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -210,7 +217,9 @@
 		76ED205515BF096C00E186D3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = SG;
 				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "Stex Group";
 			};
 			buildConfigurationList = 76ED205815BF096C00E186D3 /* Build configuration list for PBXProject "UIBubbleTableViewExample" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -268,6 +277,7 @@
 				76ED209415BF29EE00E186D3 /* UIBubbleTableViewCell.m in Sources */,
 				76D097CC1621F0E000C17816 /* UIBubbleHeaderTableViewCell.m in Sources */,
 				76687AFD1622039C00707588 /* UIBubbleTypingTableViewCell.m in Sources */,
+				148B2D66169C39B5005C6E24 /* SGBubbleTableViewAdapter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
