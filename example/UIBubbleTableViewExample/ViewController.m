@@ -86,6 +86,8 @@
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
+#pragma mark - UITableViewDelegate implementation
+
 #pragma mark - UIBubbleTableViewDataSource implementation
 
 - (NSInteger)numberOfRowsForBubbleTableView:(UIBubbleTableView *)tableView
@@ -96,6 +98,16 @@
 - (NSBubbleData *)bubbleTableView:(UIBubbleTableView *)tableView dataForRow:(NSInteger)row
 {
     return [bubbleData objectAtIndex:row];
+}
+
+#pragma mark - UIScrollView implementation
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    if (scrollView == self.bubbleTable && [textField isFirstResponder])
+    {
+        [textField resignFirstResponder];
+    }
 }
 
 #pragma mark - Keyboard events
@@ -122,10 +134,12 @@
         // Another option is to animate the origin (subtract). Then, change the origin (add),
         // height (subtract) and scroll position (add) with no animation in the completion block
         // Yet another option is to fix UIBubbleTable to pass along scroll-related messages
-        // and then to resignFirstResponder as soon as bubbleTable begins scrolling.
-        // Alternately examine:
+        // and then adjust origin.y here and resignFirstResponder as soon as bubbleTable begins scrolling.
+        // Finally, one more option: flip the table so that the visible bottom is actually the top
+        // in this scenario, we would be able to animate the height and it would shrink upward
         //   https://github.com/StephenAsherson/FlippedTableView
-        frame.size.height -= keyboardHeight;
+//        frame.size.height -= keyboardHeight;
+        frame.origin.y -= keyboardHeight;
         self.bubbleTable.frame = frame;
     } completion:nil];
 }
@@ -133,7 +147,7 @@
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 {
     NSDictionary* info = [aNotification userInfo];
-    CGFloat keyboardHeight = [info[UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
+    CGFloat keyboardHeight = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
     double duration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     NSInteger animationCurve = [[info objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
     NSInteger options = UIViewAnimationOptionBeginFromCurrentState | animationCurve;
@@ -144,7 +158,8 @@
         textInputView.frame = frame;
         
         frame = self.bubbleTable.frame;
-        frame.size.height += keyboardHeight;
+//        frame.size.height += keyboardHeight;
+        frame.origin.y += keyboardHeight;
         self.bubbleTable.frame = frame;
     } completion:^(BOOL finished) {
         [self scrollToLastBubbleAnimated:YES];
