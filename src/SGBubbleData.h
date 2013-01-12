@@ -16,7 +16,7 @@ typedef enum _NSBubbleType
     BubbleTypeSomeoneElse = 1
 } NSBubbleType;
 
-@interface NSBubbleData : NSObject
+@interface SGBubbleData : NSObject
 
 @property (readonly, nonatomic, strong) NSDate *date;
 @property (readonly, nonatomic) NSBubbleType type;

@@ -8,12 +8,12 @@
 //  To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/3.0/
 //
 
-#import "UIBubbleTableView.h"
-#import "NSBubbleData.h"
-#import "UIBubbleHeaderTableViewCell.h"
-#import "UIBubbleTypingTableViewCell.h"
+#import "SGBubbleTableView.h"
+#import "SGBubbleData.h"
+#import "SGBubbleHeaderTableViewCell.h"
+#import "SGBubbleTypingTableViewCell.h"
 
-@interface UIBubbleTableView ()
+@interface SGBubbleTableView ()
 
 @property (nonatomic, retain) NSMutableArray *bubbleSection;
 
@@ -21,7 +21,7 @@
 
 @end
 
-@implementation UIBubbleTableView
+@implementation SGBubbleTableView
 
 #pragma mark - Initializators
 

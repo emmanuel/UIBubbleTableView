@@ -6,15 +6,15 @@
 //  Copyright (c) 2012 Stex Group. All rights reserved.
 //
 
-#import "UIBubbleTypingTableViewCell.h"
+#import "SGBubbleTypingTableViewCell.h"
 
-@interface UIBubbleTypingTableViewCell ()
+@interface SGBubbleTypingTableViewCell ()
 
 @property (nonatomic, retain) UIImageView *typingImageView;
 
 @end
 
-@implementation UIBubbleTypingTableViewCell
+@implementation SGBubbleTypingTableViewCell
 
 @synthesize type = _type;
 @synthesize typingImageView = _typingImageView;

@@ -1,5 +1,5 @@
 //
-//  UIBubbleTableViewDataSource.h
+//  SGBubbleTableViewDataSource.h
 //
 //  Created by Alex Barinov
 //  Project home page: http://alexbarinov.github.com/UIBubbleTableView/
@@ -10,15 +10,15 @@
 
 #import <Foundation/Foundation.h>
 
-@class NSBubbleData;
-@class UIBubbleTableView;
-@protocol UIBubbleTableViewDataSource <NSObject>
+@class SGBubbleData;
+@class SGBubbleTableView;
+@protocol SGBubbleTableViewDataSource <NSObject>
 
 @optional
 
 @required
 
-- (NSInteger)numberOfRowsForBubbleTableView:(UIBubbleTableView *)tableView;
-- (NSBubbleData *)bubbleTableView:(UIBubbleTableView *)tableView dataForRow:(NSInteger)row;
+- (NSInteger)numberOfRowsForBubbleTableView:(SGBubbleTableView *)tableView;
+- (SGBubbleData *)bubbleTableView:(SGBubbleTableView *)tableView dataForRow:(NSInteger)row;
 
 @end

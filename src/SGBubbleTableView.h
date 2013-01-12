@@ -10,17 +10,17 @@
 
 #import <UIKit/UIKit.h>
 #import "SGBubbleTableViewAdapter.h"
-#import "UIBubbleTableViewDataSource.h"
-#import "UIBubbleTableViewCell.h"
+#import "SGBubbleTableViewDataSource.h"
+#import "SGBubbleTableViewCell.h"
 
 
-@interface UIBubbleTableView : UITableView
+@interface SGBubbleTableView : UITableView
 
 @property (nonatomic, strong) id<UITableViewDelegate, UITableViewDataSource, SGBubbleTableViewAdapterProtocol> adapter;
 
 #pragma mark Compiler hints
 
-@property (nonatomic, assign) id<UIBubbleTableViewDataSource> bubbleDataSource;
+@property (nonatomic, assign) id<SGBubbleTableViewDataSource> bubbleDataSource;
 
 @property (nonatomic) NSTimeInterval snapInterval;
 @property (nonatomic) BOOL showAvatars;

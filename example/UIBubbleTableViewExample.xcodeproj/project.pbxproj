@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		148B2D66169C39B5005C6E24 /* SGBubbleTableViewAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 148B2D65169C39B5005C6E24 /* SGBubbleTableViewAdapter.m */; };
-		76687AFD1622039C00707588 /* UIBubbleTypingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76687AFC1622039C00707588 /* UIBubbleTypingTableViewCell.m */; };
+		76687AFD1622039C00707588 /* SGBubbleTypingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76687AFC1622039C00707588 /* SGBubbleTypingTableViewCell.m */; };
 		76687AFF162203AF00707588 /* halloween.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 76687AFE162203AF00707588 /* halloween.jpg */; };
-		76D097CC1621F0E000C17816 /* UIBubbleHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D097CB1621F0E000C17816 /* UIBubbleHeaderTableViewCell.m */; };
+		76D097CC1621F0E000C17816 /* SGBubbleHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D097CB1621F0E000C17816 /* SGBubbleHeaderTableViewCell.m */; };
 		76ED206315BF096C00E186D3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76ED206215BF096C00E186D3 /* UIKit.framework */; };
 		76ED206515BF096C00E186D3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76ED206415BF096C00E186D3 /* Foundation.framework */; };
 		76ED206715BF096C00E186D3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76ED206615BF096C00E186D3 /* CoreGraphics.framework */; };
@@ -19,9 +19,9 @@
 		76ED207315BF096C00E186D3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 76ED207215BF096C00E186D3 /* AppDelegate.m */; };
 		76ED207615BF096C00E186D3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76ED207515BF096C00E186D3 /* ViewController.m */; };
 		76ED207915BF096C00E186D3 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76ED207715BF096C00E186D3 /* ViewController.xib */; };
-		76ED208715BF09E300E186D3 /* UIBubbleTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76ED208615BF09E300E186D3 /* UIBubbleTableView.m */; };
-		76ED208B15BF0BB100E186D3 /* NSBubbleData.m in Sources */ = {isa = PBXBuildFile; fileRef = 76ED208A15BF0BB100E186D3 /* NSBubbleData.m */; };
-		76ED209415BF29EE00E186D3 /* UIBubbleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76ED209315BF29EE00E186D3 /* UIBubbleTableViewCell.m */; };
+		76ED208715BF09E300E186D3 /* SGBubbleTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76ED208615BF09E300E186D3 /* SGBubbleTableView.m */; };
+		76ED208B15BF0BB100E186D3 /* SGBubbleData.m in Sources */ = {isa = PBXBuildFile; fileRef = 76ED208A15BF0BB100E186D3 /* SGBubbleData.m */; };
+		76ED209415BF29EE00E186D3 /* SGBubbleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76ED209315BF29EE00E186D3 /* SGBubbleTableViewCell.m */; };
 		C836D5CA1625CBA5004CB4A9 /* missingAvatar.png in Resources */ = {isa = PBXBuildFile; fileRef = C836D5C81625CBA5004CB4A9 /* missingAvatar.png */; };
 		C836D5CB1625CBA5004CB4A9 /* missingAvatar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C836D5C91625CBA5004CB4A9 /* missingAvatar@2x.png */; };
 		C836D5CE1625D718004CB4A9 /* avatar1.png in Resources */ = {isa = PBXBuildFile; fileRef = C836D5CD1625D718004CB4A9 /* avatar1.png */; };
@@ -41,11 +41,11 @@
 		148B2D64169C39B5005C6E24 /* SGBubbleTableViewAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGBubbleTableViewAdapter.h; path = ../../src/SGBubbleTableViewAdapter.h; sourceTree = "<group>"; };
 		148B2D65169C39B5005C6E24 /* SGBubbleTableViewAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGBubbleTableViewAdapter.m; path = ../../src/SGBubbleTableViewAdapter.m; sourceTree = "<group>"; };
 		148B2D82169E2489005C6E24 /* SGBubbleTableViewAdapterProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGBubbleTableViewAdapterProtocol.h; path = ../../src/SGBubbleTableViewAdapterProtocol.h; sourceTree = "<group>"; };
-		76687AFB1622039C00707588 /* UIBubbleTypingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIBubbleTypingTableViewCell.h; path = ../../src/UIBubbleTypingTableViewCell.h; sourceTree = "<group>"; };
-		76687AFC1622039C00707588 /* UIBubbleTypingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIBubbleTypingTableViewCell.m; path = ../../src/UIBubbleTypingTableViewCell.m; sourceTree = "<group>"; };
+		76687AFB1622039C00707588 /* SGBubbleTypingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGBubbleTypingTableViewCell.h; path = ../../src/SGBubbleTypingTableViewCell.h; sourceTree = "<group>"; };
+		76687AFC1622039C00707588 /* SGBubbleTypingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGBubbleTypingTableViewCell.m; path = ../../src/SGBubbleTypingTableViewCell.m; sourceTree = "<group>"; };
 		76687AFE162203AF00707588 /* halloween.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = halloween.jpg; sourceTree = SOURCE_ROOT; };
-		76D097CA1621F0E000C17816 /* UIBubbleHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIBubbleHeaderTableViewCell.h; path = ../../src/UIBubbleHeaderTableViewCell.h; sourceTree = "<group>"; };
-		76D097CB1621F0E000C17816 /* UIBubbleHeaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIBubbleHeaderTableViewCell.m; path = ../../src/UIBubbleHeaderTableViewCell.m; sourceTree = "<group>"; };
+		76D097CA1621F0E000C17816 /* SGBubbleHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGBubbleHeaderTableViewCell.h; path = ../../src/SGBubbleHeaderTableViewCell.h; sourceTree = "<group>"; };
+		76D097CB1621F0E000C17816 /* SGBubbleHeaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGBubbleHeaderTableViewCell.m; path = ../../src/SGBubbleHeaderTableViewCell.m; sourceTree = "<group>"; };
 		76ED205E15BF096C00E186D3 /* UIBubbleTableViewExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UIBubbleTableViewExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76ED206215BF096C00E186D3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		76ED206415BF096C00E186D3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -59,13 +59,13 @@
 		76ED207415BF096C00E186D3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		76ED207515BF096C00E186D3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		76ED207815BF096C00E186D3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
-		76ED208515BF09E300E186D3 /* UIBubbleTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIBubbleTableView.h; path = ../../src/UIBubbleTableView.h; sourceTree = "<group>"; };
-		76ED208615BF09E300E186D3 /* UIBubbleTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIBubbleTableView.m; path = ../../src/UIBubbleTableView.m; sourceTree = "<group>"; };
-		76ED208815BF0B4400E186D3 /* UIBubbleTableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UIBubbleTableViewDataSource.h; path = ../../src/UIBubbleTableViewDataSource.h; sourceTree = "<group>"; };
-		76ED208915BF0BB100E186D3 /* NSBubbleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSBubbleData.h; path = ../../src/NSBubbleData.h; sourceTree = "<group>"; };
-		76ED208A15BF0BB100E186D3 /* NSBubbleData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSBubbleData.m; path = ../../src/NSBubbleData.m; sourceTree = "<group>"; };
-		76ED209215BF29EE00E186D3 /* UIBubbleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIBubbleTableViewCell.h; path = ../../src/UIBubbleTableViewCell.h; sourceTree = "<group>"; };
-		76ED209315BF29EE00E186D3 /* UIBubbleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIBubbleTableViewCell.m; path = ../../src/UIBubbleTableViewCell.m; sourceTree = "<group>"; };
+		76ED208515BF09E300E186D3 /* SGBubbleTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGBubbleTableView.h; path = ../../src/SGBubbleTableView.h; sourceTree = "<group>"; };
+		76ED208615BF09E300E186D3 /* SGBubbleTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGBubbleTableView.m; path = ../../src/SGBubbleTableView.m; sourceTree = "<group>"; };
+		76ED208815BF0B4400E186D3 /* SGBubbleTableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGBubbleTableViewDataSource.h; path = ../../src/SGBubbleTableViewDataSource.h; sourceTree = "<group>"; };
+		76ED208915BF0BB100E186D3 /* SGBubbleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGBubbleData.h; path = ../../src/SGBubbleData.h; sourceTree = "<group>"; };
+		76ED208A15BF0BB100E186D3 /* SGBubbleData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGBubbleData.m; path = ../../src/SGBubbleData.m; sourceTree = "<group>"; };
+		76ED209215BF29EE00E186D3 /* SGBubbleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGBubbleTableViewCell.h; path = ../../src/SGBubbleTableViewCell.h; sourceTree = "<group>"; };
+		76ED209315BF29EE00E186D3 /* SGBubbleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGBubbleTableViewCell.m; path = ../../src/SGBubbleTableViewCell.m; sourceTree = "<group>"; };
 		C836D5C81625CBA5004CB4A9 /* missingAvatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = missingAvatar.png; sourceTree = "<group>"; };
 		C836D5C91625CBA5004CB4A9 /* missingAvatar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "missingAvatar@2x.png"; sourceTree = "<group>"; };
 		C836D5CD1625D718004CB4A9 /* avatar1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar1.png; sourceTree = SOURCE_ROOT; };
@@ -155,17 +155,17 @@
 		76ED208315BF09AD00E186D3 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				76ED208915BF0BB100E186D3 /* NSBubbleData.h */,
-				76ED208A15BF0BB100E186D3 /* NSBubbleData.m */,
-				76ED208515BF09E300E186D3 /* UIBubbleTableView.h */,
-				76ED208615BF09E300E186D3 /* UIBubbleTableView.m */,
-				76ED209215BF29EE00E186D3 /* UIBubbleTableViewCell.h */,
-				76ED209315BF29EE00E186D3 /* UIBubbleTableViewCell.m */,
-				76D097CA1621F0E000C17816 /* UIBubbleHeaderTableViewCell.h */,
-				76D097CB1621F0E000C17816 /* UIBubbleHeaderTableViewCell.m */,
-				76687AFB1622039C00707588 /* UIBubbleTypingTableViewCell.h */,
-				76687AFC1622039C00707588 /* UIBubbleTypingTableViewCell.m */,
-				76ED208815BF0B4400E186D3 /* UIBubbleTableViewDataSource.h */,
+				76ED208915BF0BB100E186D3 /* SGBubbleData.h */,
+				76ED208A15BF0BB100E186D3 /* SGBubbleData.m */,
+				76ED208515BF09E300E186D3 /* SGBubbleTableView.h */,
+				76ED208615BF09E300E186D3 /* SGBubbleTableView.m */,
+				76ED209215BF29EE00E186D3 /* SGBubbleTableViewCell.h */,
+				76ED209315BF29EE00E186D3 /* SGBubbleTableViewCell.m */,
+				76D097CA1621F0E000C17816 /* SGBubbleHeaderTableViewCell.h */,
+				76D097CB1621F0E000C17816 /* SGBubbleHeaderTableViewCell.m */,
+				76687AFB1622039C00707588 /* SGBubbleTypingTableViewCell.h */,
+				76687AFC1622039C00707588 /* SGBubbleTypingTableViewCell.m */,
+				76ED208815BF0B4400E186D3 /* SGBubbleTableViewDataSource.h */,
 				148B2D64169C39B5005C6E24 /* SGBubbleTableViewAdapter.h */,
 				148B2D65169C39B5005C6E24 /* SGBubbleTableViewAdapter.m */,
 				148B2D82169E2489005C6E24 /* SGBubbleTableViewAdapterProtocol.h */,
@@ -272,11 +272,11 @@
 				76ED206F15BF096C00E186D3 /* main.m in Sources */,
 				76ED207315BF096C00E186D3 /* AppDelegate.m in Sources */,
 				76ED207615BF096C00E186D3 /* ViewController.m in Sources */,
-				76ED208715BF09E300E186D3 /* UIBubbleTableView.m in Sources */,
-				76ED208B15BF0BB100E186D3 /* NSBubbleData.m in Sources */,
-				76ED209415BF29EE00E186D3 /* UIBubbleTableViewCell.m in Sources */,
-				76D097CC1621F0E000C17816 /* UIBubbleHeaderTableViewCell.m in Sources */,
-				76687AFD1622039C00707588 /* UIBubbleTypingTableViewCell.m in Sources */,
+				76ED208715BF09E300E186D3 /* SGBubbleTableView.m in Sources */,
+				76ED208B15BF0BB100E186D3 /* SGBubbleData.m in Sources */,
+				76ED209415BF29EE00E186D3 /* SGBubbleTableViewCell.m in Sources */,
+				76D097CC1621F0E000C17816 /* SGBubbleHeaderTableViewCell.m in Sources */,
+				76687AFD1622039C00707588 /* SGBubbleTypingTableViewCell.m in Sources */,
 				148B2D66169C39B5005C6E24 /* SGBubbleTableViewAdapter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

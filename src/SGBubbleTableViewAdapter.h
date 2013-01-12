@@ -7,22 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "UIBubbleTableViewDataSource.h"
+#import "SGBubbleTableViewDataSource.h"
 #import "SGBubbleTableViewAdapterProtocol.h"
 
 @interface SGBubbleTableViewAdapter : NSObject <UITableViewDelegate, UITableViewDataSource, SGBubbleTableViewAdapterProtocol>
 
 @property (nonatomic, weak) id<UITableViewDelegate> delegate;
-@property (nonatomic, weak) id<UIBubbleTableViewDataSource> bubbleDataSource;
+@property (nonatomic, weak) id<SGBubbleTableViewDataSource> bubbleDataSource;
 
 @property (nonatomic, assign) NSTimeInterval snapInterval;
 @property (nonatomic, assign) NSBubbleTypingType typingBubble;
 @property (nonatomic, assign) BOOL showAvatars;
 
-@property (nonatomic, weak) UIBubbleTableView *bubbleTableView;
+@property (nonatomic, weak) SGBubbleTableView *bubbleTableView;
 @property (nonatomic, strong) NSMutableArray *bubbleSections;
 
-- (id)initWithBubbleTableView:(UIBubbleTableView *)bubbleTableView;
+- (id)initWithBubbleTableView:(SGBubbleTableView *)bubbleTableView;
 - (id)forwardingTargetForSelector:(SEL)aSelector;
 - (BOOL)respondsToSelector:(SEL)aSelector;
 

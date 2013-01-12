@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "UIBubbleTableViewDataSource.h"
+#import "SGBubbleTableViewDataSource.h"
 
 typedef enum NSBubbleTypingType : NSInteger NSBubbleTypingType; enum NSBubbleTypingType : NSInteger
 {
@@ -19,7 +19,7 @@ typedef enum NSBubbleTypingType : NSInteger NSBubbleTypingType; enum NSBubbleTyp
 @protocol SGBubbleTableViewAdapterProtocol <NSObject>
 
 @property (nonatomic, weak) id<UITableViewDelegate> delegate;
-@property (nonatomic, weak) id<UIBubbleTableViewDataSource> bubbleDataSource;
+@property (nonatomic, weak) id<SGBubbleTableViewDataSource> bubbleDataSource;
 
 @property (nonatomic, assign) NSTimeInterval snapInterval;
 @property (nonatomic, assign) NSBubbleTypingType typingBubble;

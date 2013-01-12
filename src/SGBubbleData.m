@@ -8,10 +8,10 @@
 //  To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/3.0/
 //
 
-#import "NSBubbleData.h"
+#import "SGBubbleData.h"
 #import <QuartzCore/QuartzCore.h>
 
-@implementation NSBubbleData
+@implementation SGBubbleData
 
 #pragma mark - Properties
 
@@ -47,9 +47,9 @@ const NSInteger kMaxContentHeight = 9999;
 + (id)dataWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type
 {
 #if !__has_feature(objc_arc)
-    return [[[NSBubbleData alloc] initWithText:text date:date type:type] autorelease];
+    return [[[SGBubbleData alloc] initWithText:text date:date type:type] autorelease];
 #else
-    return [[NSBubbleData alloc] initWithText:text date:date type:type];
+    return [[SGBubbleData alloc] initWithText:text date:date type:type];
 #endif    
 }
 
@@ -84,9 +84,9 @@ const UIEdgeInsets imageInsetsSomeone = {11, 18, 16, 14};
 + (id)dataWithImage:(UIImage *)image date:(NSDate *)date type:(NSBubbleType)type
 {
 #if !__has_feature(objc_arc)
-    return [[[NSBubbleData alloc] initWithImage:image date:date type:type] autorelease];
+    return [[[SGBubbleData alloc] initWithImage:image date:date type:type] autorelease];
 #else
-    return [[NSBubbleData alloc] initWithImage:image date:date type:type];
+    return [[SGBubbleData alloc] initWithImage:image date:date type:type];
 #endif    
 }
 
@@ -117,9 +117,9 @@ const UIEdgeInsets imageInsetsSomeone = {11, 18, 16, 14};
 + (id)dataWithView:(UIView *)view date:(NSDate *)date type:(NSBubbleType)type insets:(UIEdgeInsets)insets
 {
 #if !__has_feature(objc_arc)
-    return [[[NSBubbleData alloc] initWithView:view date:date type:type insets:insets] autorelease];
+    return [[[SGBubbleData alloc] initWithView:view date:date type:type insets:insets] autorelease];
 #else
-    return [[NSBubbleData alloc] initWithView:view date:date type:type insets:insets];
+    return [[SGBubbleData alloc] initWithView:view date:date type:type insets:insets];
 #endif    
 }
 

@@ -9,8 +9,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UIBubbleTableViewDataSource.h"
+#import "SGBubbleTableViewDataSource.h"
 
-@interface ViewController : UIViewController <UITableViewDelegate, UIBubbleTableViewDataSource>
+@interface ViewController : UIViewController <UITableViewDelegate, SGBubbleTableViewDataSource>
 
 @end

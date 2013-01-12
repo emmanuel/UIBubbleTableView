@@ -7,11 +7,11 @@
 //
 
 #import "SGBubbleTableViewAdapter.h"
-#import "NSBubbleData.h"
-#import "UIBubbleTableView.h"
-#import "UIBubbleTableViewCell.h"
-#import "UIBubbleHeaderTableViewCell.h"
-#import "UIBubbleTypingTableViewCell.h"
+#import "SGBubbleData.h"
+#import "SGBubbleTableView.h"
+#import "SGBubbleTableViewCell.h"
+#import "SGBubbleHeaderTableViewCell.h"
+#import "SGBubbleTypingTableViewCell.h"
 
 @interface SGBubbleTableViewAdapter ()
 
@@ -21,7 +21,7 @@
 
 #pragma mark - Initializer
 
-- (id)initWithBubbleTableView:(UIBubbleTableView *)bubbleTableView
+- (id)initWithBubbleTableView:(SGBubbleTableView *)bubbleTableView
 {
     self = [super init];
     if (self)
@@ -90,9 +90,9 @@
     if (indexPath.section >= [self.bubbleSections count])
     {
         static NSString *cellId = @"tblBubbleTypingCell";
-        UIBubbleTypingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        SGBubbleTypingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         
-        if (cell == nil) cell = [[UIBubbleTypingTableViewCell alloc] init];
+        if (cell == nil) cell = [[SGBubbleTypingTableViewCell alloc] init];
         
         cell.type = self.typingBubble;
         cell.showAvatar = self.showAvatars;
@@ -104,10 +104,10 @@
     if (indexPath.row == 0)
     {
         static NSString *cellId = @"tblBubbleHeaderCell";
-        UIBubbleHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-        NSBubbleData *data = [[self.bubbleSections objectAtIndex:indexPath.section] objectAtIndex:0];
+        SGBubbleHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        SGBubbleData *data = [[self.bubbleSections objectAtIndex:indexPath.section] objectAtIndex:0];
         
-        if (cell == nil) cell = [[UIBubbleHeaderTableViewCell alloc] init];
+        if (cell == nil) cell = [[SGBubbleHeaderTableViewCell alloc] init];
         
         cell.date = data.date;
         
@@ -116,10 +116,10 @@
     
     // Standard bubble
     static NSString *cellId = @"tblBubbleCell";
-    UIBubbleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    NSBubbleData *data = [[self.bubbleSections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row - 1];
+    SGBubbleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    SGBubbleData *data = [[self.bubbleSections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row - 1];
     
-    if (cell == nil) cell = [[UIBubbleTableViewCell alloc] init];
+    if (cell == nil) cell = [[SGBubbleTableViewCell alloc] init];
     
     cell.data = data;
     cell.showAvatar = self.showAvatars;
@@ -134,16 +134,16 @@
     // Now typing
 	if (indexPath.section >= [self.bubbleSections count])
     {
-        return MAX([UIBubbleTypingTableViewCell height], self.showAvatars ? 52 : 0);
+        return MAX([SGBubbleTypingTableViewCell height], self.showAvatars ? 52 : 0);
     }
     
     // Header
     if (indexPath.row == 0)
     {
-        return [UIBubbleHeaderTableViewCell height];
+        return [SGBubbleHeaderTableViewCell height];
     }
     
-    NSBubbleData *data = [[self.bubbleSections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row - 1];
+    SGBubbleData *data = [[self.bubbleSections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row - 1];
     return MAX(data.insets.top + data.view.frame.size.height + data.insets.bottom, self.showAvatars ? 52 : 0);
 }
 
@@ -171,14 +171,14 @@
         for (int i = 0; i < count; i++)
         {
             NSObject *object = [self.bubbleDataSource bubbleTableView:self.bubbleTableView dataForRow:i];
-            assert([object isKindOfClass:[NSBubbleData class]]);
+            assert([object isKindOfClass:[SGBubbleData class]]);
             [bubbleData addObject:object];
         }
 
         [bubbleData sortUsingComparator:^NSComparisonResult(id obj1, id obj2)
          {
-             NSBubbleData *bubbleData1 = (NSBubbleData *)obj1;
-             NSBubbleData *bubbleData2 = (NSBubbleData *)obj2;
+             SGBubbleData *bubbleData1 = (SGBubbleData *)obj1;
+             SGBubbleData *bubbleData2 = (SGBubbleData *)obj2;
              
              return [bubbleData1.date compare:bubbleData2.date];
          }];
@@ -188,7 +188,7 @@
 
         for (int i = 0; i < count; i++)
         {
-            NSBubbleData *data = (NSBubbleData *)[bubbleData objectAtIndex:i];
+            SGBubbleData *data = (SGBubbleData *)[bubbleData objectAtIndex:i];
             
             if ([data.date timeIntervalSinceDate:last] > self.snapInterval)
             {

@@ -9,10 +9,10 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
-#import "UIBubbleTableViewCell.h"
-#import "NSBubbleData.h"
+#import "SGBubbleTableViewCell.h"
+#import "SGBubbleData.h"
 
-@interface UIBubbleTableViewCell ()
+@interface SGBubbleTableViewCell ()
 
 @property (nonatomic, retain) UIView *customView;
 @property (nonatomic, retain) UIImageView *bubbleImage;
@@ -22,7 +22,7 @@
 
 @end
 
-@implementation UIBubbleTableViewCell
+@implementation SGBubbleTableViewCell
 
 @synthesize data = _data;
 @synthesize customView = _customView;
@@ -47,7 +47,7 @@
 }
 #endif
 
-- (void)setDataInternal:(NSBubbleData *)value
+- (void)setDataInternal:(SGBubbleData *)value
 {
 	self.data = value;
 	[self setupInternalData];

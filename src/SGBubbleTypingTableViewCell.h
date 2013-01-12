@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UIBubbleTableView.h"
+#import "SGBubbleTableView.h"
 
 
-@interface UIBubbleTypingTableViewCell : UITableViewCell
+@interface SGBubbleTypingTableViewCell : UITableViewCell
 
 + (CGFloat)height;
 

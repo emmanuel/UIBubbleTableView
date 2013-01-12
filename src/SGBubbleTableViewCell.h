@@ -9,11 +9,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NSBubbleData.h"
+#import "SGBubbleData.h"
 
-@interface UIBubbleTableViewCell : UITableViewCell
+@interface SGBubbleTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) NSBubbleData *data;
+@property (nonatomic, strong) SGBubbleData *data;
 @property (nonatomic) BOOL showAvatar;
 
 @end

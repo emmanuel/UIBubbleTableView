@@ -15,20 +15,20 @@
 //
 
 #import "ViewController.h"
-#import "UIBubbleTableView.h"
-#import "UIBubbleTableViewDataSource.h"
-#import "NSBubbleData.h"
+#import "SGBubbleTableView.h"
+#import "SGBubbleTableViewDataSource.h"
+#import "SGBubbleData.h"
 
 @interface ViewController ()
 {
-    IBOutlet UIBubbleTableView *bubbleTable;
+    IBOutlet SGBubbleTableView *bubbleTable;
     IBOutlet UIView *textInputView;
     IBOutlet UITextField *textField;
 
     NSMutableArray *bubbleData;
 }
 
-@property (nonatomic, weak) IBOutlet UIBubbleTableView *bubbleTable;
+@property (nonatomic, weak) IBOutlet SGBubbleTableView *bubbleTable;
 
 - (void)scrollToLastBubbleAnimated:(BOOL)animated;
 - (NSIndexPath *)indexPathForLastBubble;
@@ -39,17 +39,17 @@
 
 - (void)viewDidLoad
 {
-    [[UIBubbleTableView appearance] setBackgroundColor:[UIColor lightGrayColor]];
+    [[SGBubbleTableView appearance] setBackgroundColor:[UIColor lightGrayColor]];
 
     [super viewDidLoad];
     
-    NSBubbleData *heyBubble = [NSBubbleData dataWithText:@"Hey, halloween is soon" date:[NSDate dateWithTimeIntervalSinceNow:-300] type:BubbleTypeSomeoneElse];
+    SGBubbleData *heyBubble = [SGBubbleData dataWithText:@"Hey, halloween is soon" date:[NSDate dateWithTimeIntervalSinceNow:-300] type:BubbleTypeSomeoneElse];
     heyBubble.avatar = [UIImage imageNamed:@"avatar1.png"];
 
-    NSBubbleData *photoBubble = [NSBubbleData dataWithImage:[UIImage imageNamed:@"halloween.jpg"] date:[NSDate dateWithTimeIntervalSinceNow:-290] type:BubbleTypeSomeoneElse];
+    SGBubbleData *photoBubble = [SGBubbleData dataWithImage:[UIImage imageNamed:@"halloween.jpg"] date:[NSDate dateWithTimeIntervalSinceNow:-290] type:BubbleTypeSomeoneElse];
     photoBubble.avatar = [UIImage imageNamed:@"avatar1.png"];
     
-    NSBubbleData *replyBubble = [NSBubbleData dataWithText:@"Wow.. Really cool picture out there. iPhone 5 has really nice camera, yeah?" date:[NSDate dateWithTimeIntervalSinceNow:-5] type:BubbleTypeMine];
+    SGBubbleData *replyBubble = [SGBubbleData dataWithText:@"Wow.. Really cool picture out there. iPhone 5 has really nice camera, yeah?" date:[NSDate dateWithTimeIntervalSinceNow:-5] type:BubbleTypeMine];
     replyBubble.avatar = nil;
     
     bubbleData = [[NSMutableArray alloc] initWithObjects:heyBubble, photoBubble, replyBubble, nil];
@@ -90,14 +90,14 @@
 
 #pragma mark - UITableViewDelegate implementation
 
-#pragma mark - UIBubbleTableViewDataSource implementation
+#pragma mark - SGBubbleTableViewDataSource implementation
 
-- (NSInteger)numberOfRowsForBubbleTableView:(UIBubbleTableView *)tableView
+- (NSInteger)numberOfRowsForBubbleTableView:(SGBubbleTableView *)tableView
 {
     return [bubbleData count];
 }
 
-- (NSBubbleData *)bubbleTableView:(UIBubbleTableView *)tableView dataForRow:(NSInteger)row
+- (SGBubbleData *)bubbleTableView:(SGBubbleTableView *)tableView dataForRow:(NSInteger)row
 {
     return [bubbleData objectAtIndex:row];
 }
@@ -174,7 +174,7 @@
 {
     self.bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
 
-    NSBubbleData *sayBubble = [NSBubbleData dataWithText:textField.text date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
+    SGBubbleData *sayBubble = [SGBubbleData dataWithText:textField.text date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
     [bubbleData addObject:sayBubble];
     [self.bubbleTable reloadData];
 
