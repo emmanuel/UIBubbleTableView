@@ -11,7 +11,7 @@
 #import "SGBubbleTableView.h"
 #import "SGBubbleTableViewContentCell.h"
 #import "SGBubbleTableViewHeaderCell.h"
-#import "SGBubbleTypingTableViewCell.h"
+#import "SGBubbleTableViewTypingCell.h"
 
 @interface SGBubbleTableViewAdapter ()
 
@@ -90,9 +90,9 @@
     if (indexPath.section >= [self.bubbleSections count])
     {
         static NSString *cellId = @"tblBubbleTypingCell";
-        SGBubbleTypingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        SGBubbleTableViewTypingCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         
-        if (cell == nil) cell = [[SGBubbleTypingTableViewCell alloc] init];
+        if (cell == nil) cell = [[SGBubbleTableViewTypingCell alloc] init];
         
         cell.type = self.typingBubble;
         cell.showAvatar = self.showAvatars;
@@ -134,7 +134,7 @@
     // Now typing
 	if (indexPath.section >= [self.bubbleSections count])
     {
-        return MAX([SGBubbleTypingTableViewCell height], self.showAvatars ? 52 : 0);
+        return MAX([SGBubbleTableViewTypingCell height], self.showAvatars ? 52 : 0);
     }
     
     // Header
