@@ -10,7 +10,7 @@
 #import "SGBubbleData.h"
 #import "SGBubbleTableView.h"
 #import "SGBubbleTableViewContentCell.h"
-#import "SGBubbleHeaderTableViewCell.h"
+#import "SGBubbleTableViewHeaderCell.h"
 #import "SGBubbleTypingTableViewCell.h"
 
 @interface SGBubbleTableViewAdapter ()
@@ -104,10 +104,10 @@
     if (indexPath.row == 0)
     {
         static NSString *cellId = @"tblBubbleHeaderCell";
-        SGBubbleHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        SGBubbleTableViewHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         SGBubbleData *data = [[self.bubbleSections objectAtIndex:indexPath.section] objectAtIndex:0];
         
-        if (cell == nil) cell = [[SGBubbleHeaderTableViewCell alloc] init];
+        if (cell == nil) cell = [[SGBubbleTableViewHeaderCell alloc] init];
         
         cell.date = data.date;
         
@@ -140,7 +140,7 @@
     // Header
     if (indexPath.row == 0)
     {
-        return [SGBubbleHeaderTableViewCell height];
+        return [SGBubbleTableViewHeaderCell height];
     }
     
     SGBubbleData *data = [[self.bubbleSections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row - 1];

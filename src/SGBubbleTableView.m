@@ -10,7 +10,7 @@
 
 #import "SGBubbleTableView.h"
 #import "SGBubbleData.h"
-#import "SGBubbleHeaderTableViewCell.h"
+#import "SGBubbleTableViewHeaderCell.h"
 #import "SGBubbleTypingTableViewCell.h"
 
 @interface SGBubbleTableView ()

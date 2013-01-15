@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SGBubbleHeaderTableViewCell : UITableViewCell
+@interface SGBubbleTableViewHeaderCell : UITableViewCell
 
 + (CGFloat)height;
 

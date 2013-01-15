@@ -6,15 +6,15 @@
 //  Copyright (c) 2012 Stex Group. All rights reserved.
 //
 
-#import "SGBubbleHeaderTableViewCell.h"
+#import "SGBubbleTableViewHeaderCell.h"
 
-@interface SGBubbleHeaderTableViewCell ()
+@interface SGBubbleTableViewHeaderCell ()
 
 @property (nonatomic, retain) UILabel *label;
 
 @end
 
-@implementation SGBubbleHeaderTableViewCell
+@implementation SGBubbleTableViewHeaderCell
 
 @synthesize label = _label;
 @synthesize date = _date;
@@ -41,7 +41,7 @@
     }
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    self.label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, [SGBubbleHeaderTableViewCell height])];
+    self.label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, [SGBubbleTableViewHeaderCell height])];
     self.label.text = text;
     self.label.font = [UIFont boldSystemFontOfSize:12];
     self.label.textAlignment = UITextAlignmentCenter;
