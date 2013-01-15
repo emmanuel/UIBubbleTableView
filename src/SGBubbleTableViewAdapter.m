@@ -9,7 +9,7 @@
 #import "SGBubbleTableViewAdapter.h"
 #import "SGBubbleData.h"
 #import "SGBubbleTableView.h"
-#import "SGBubbleTableViewCell.h"
+#import "SGBubbleTableViewContentCell.h"
 #import "SGBubbleHeaderTableViewCell.h"
 #import "SGBubbleTypingTableViewCell.h"
 
@@ -116,10 +116,10 @@
     
     // Standard bubble
     static NSString *cellId = @"tblBubbleCell";
-    SGBubbleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    SGBubbleTableViewContentCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     SGBubbleData *data = [[self.bubbleSections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row - 1];
     
-    if (cell == nil) cell = [[SGBubbleTableViewCell alloc] init];
+    if (cell == nil) cell = [[SGBubbleTableViewContentCell alloc] init];
     
     cell.data = data;
     cell.showAvatar = self.showAvatars;

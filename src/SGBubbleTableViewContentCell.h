@@ -11,7 +11,7 @@
 #import <UIKit/UIKit.h>
 #import "SGBubbleData.h"
 
-@interface SGBubbleTableViewCell : UITableViewCell
+@interface SGBubbleTableViewContentCell : UITableViewCell
 
 @property (nonatomic, strong) SGBubbleData *data;
 @property (nonatomic) BOOL showAvatar;

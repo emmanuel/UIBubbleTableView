@@ -9,10 +9,10 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
-#import "SGBubbleTableViewCell.h"
+#import "SGBubbleTableViewContentCell.h"
 #import "SGBubbleData.h"
 
-@interface SGBubbleTableViewCell ()
+@interface SGBubbleTableViewContentCell ()
 
 @property (nonatomic, retain) UIView *customView;
 @property (nonatomic, retain) UIImageView *bubbleImage;
@@ -22,7 +22,7 @@
 
 @end
 
-@implementation SGBubbleTableViewCell
+@implementation SGBubbleTableViewContentCell
 
 @synthesize data = _data;
 @synthesize customView = _customView;

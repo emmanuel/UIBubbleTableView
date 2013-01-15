@@ -11,7 +11,7 @@
 #import <UIKit/UIKit.h>
 #import "SGBubbleTableViewAdapter.h"
 #import "SGBubbleTableViewDataSource.h"
-#import "SGBubbleTableViewCell.h"
+#import "SGBubbleTableViewContentCell.h"
 
 
 @interface SGBubbleTableView : UITableView

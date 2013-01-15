@@ -21,7 +21,7 @@
 		76ED207915BF096C00E186D3 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76ED207715BF096C00E186D3 /* ViewController.xib */; };
 		76ED208715BF09E300E186D3 /* SGBubbleTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76ED208615BF09E300E186D3 /* SGBubbleTableView.m */; };
 		76ED208B15BF0BB100E186D3 /* SGBubbleData.m in Sources */ = {isa = PBXBuildFile; fileRef = 76ED208A15BF0BB100E186D3 /* SGBubbleData.m */; };
-		76ED209415BF29EE00E186D3 /* SGBubbleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76ED209315BF29EE00E186D3 /* SGBubbleTableViewCell.m */; };
+		76ED209415BF29EE00E186D3 /* SGBubbleTableViewContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76ED209315BF29EE00E186D3 /* SGBubbleTableViewContentCell.m */; };
 		C836D5CA1625CBA5004CB4A9 /* missingAvatar.png in Resources */ = {isa = PBXBuildFile; fileRef = C836D5C81625CBA5004CB4A9 /* missingAvatar.png */; };
 		C836D5CB1625CBA5004CB4A9 /* missingAvatar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C836D5C91625CBA5004CB4A9 /* missingAvatar@2x.png */; };
 		C836D5CE1625D718004CB4A9 /* avatar1.png in Resources */ = {isa = PBXBuildFile; fileRef = C836D5CD1625D718004CB4A9 /* avatar1.png */; };
@@ -64,8 +64,8 @@
 		76ED208815BF0B4400E186D3 /* SGBubbleTableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGBubbleTableViewDataSource.h; path = ../../src/SGBubbleTableViewDataSource.h; sourceTree = "<group>"; };
 		76ED208915BF0BB100E186D3 /* SGBubbleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGBubbleData.h; path = ../../src/SGBubbleData.h; sourceTree = "<group>"; };
 		76ED208A15BF0BB100E186D3 /* SGBubbleData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGBubbleData.m; path = ../../src/SGBubbleData.m; sourceTree = "<group>"; };
-		76ED209215BF29EE00E186D3 /* SGBubbleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGBubbleTableViewCell.h; path = ../../src/SGBubbleTableViewCell.h; sourceTree = "<group>"; };
-		76ED209315BF29EE00E186D3 /* SGBubbleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGBubbleTableViewCell.m; path = ../../src/SGBubbleTableViewCell.m; sourceTree = "<group>"; };
+		76ED209215BF29EE00E186D3 /* SGBubbleTableViewContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGBubbleTableViewContentCell.h; path = ../../src/SGBubbleTableViewContentCell.h; sourceTree = "<group>"; };
+		76ED209315BF29EE00E186D3 /* SGBubbleTableViewContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGBubbleTableViewContentCell.m; path = ../../src/SGBubbleTableViewContentCell.m; sourceTree = "<group>"; };
 		C836D5C81625CBA5004CB4A9 /* missingAvatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = missingAvatar.png; sourceTree = "<group>"; };
 		C836D5C91625CBA5004CB4A9 /* missingAvatar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "missingAvatar@2x.png"; sourceTree = "<group>"; };
 		C836D5CD1625D718004CB4A9 /* avatar1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar1.png; sourceTree = SOURCE_ROOT; };
@@ -159,8 +159,8 @@
 				76ED208A15BF0BB100E186D3 /* SGBubbleData.m */,
 				76ED208515BF09E300E186D3 /* SGBubbleTableView.h */,
 				76ED208615BF09E300E186D3 /* SGBubbleTableView.m */,
-				76ED209215BF29EE00E186D3 /* SGBubbleTableViewCell.h */,
-				76ED209315BF29EE00E186D3 /* SGBubbleTableViewCell.m */,
+				76ED209215BF29EE00E186D3 /* SGBubbleTableViewContentCell.h */,
+				76ED209315BF29EE00E186D3 /* SGBubbleTableViewContentCell.m */,
 				76D097CA1621F0E000C17816 /* SGBubbleHeaderTableViewCell.h */,
 				76D097CB1621F0E000C17816 /* SGBubbleHeaderTableViewCell.m */,
 				76687AFB1622039C00707588 /* SGBubbleTypingTableViewCell.h */,
@@ -274,7 +274,7 @@
 				76ED207615BF096C00E186D3 /* ViewController.m in Sources */,
 				76ED208715BF09E300E186D3 /* SGBubbleTableView.m in Sources */,
 				76ED208B15BF0BB100E186D3 /* SGBubbleData.m in Sources */,
-				76ED209415BF29EE00E186D3 /* SGBubbleTableViewCell.m in Sources */,
+				76ED209415BF29EE00E186D3 /* SGBubbleTableViewContentCell.m in Sources */,
 				76D097CC1621F0E000C17816 /* SGBubbleHeaderTableViewCell.m in Sources */,
 				76687AFD1622039C00707588 /* SGBubbleTypingTableViewCell.m in Sources */,
 				148B2D66169C39B5005C6E24 /* SGBubbleTableViewAdapter.m in Sources */,
