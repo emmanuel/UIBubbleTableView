@@ -43,13 +43,13 @@
 
     [super viewDidLoad];
     
-    SGBubbleData *heyBubble = [SGBubbleData dataWithText:@"Hey, halloween is soon" date:[NSDate dateWithTimeIntervalSinceNow:-300] type:BubbleTypeSomeoneElse];
+    SGBubbleData *heyBubble = [SGBubbleData dataWithText:@"Hey, halloween is soon" date:[NSDate dateWithTimeIntervalSinceNow:-300] direction:SGBubbleDirectionLeft];
     heyBubble.avatar = [UIImage imageNamed:@"avatar1.png"];
 
-    SGBubbleData *photoBubble = [SGBubbleData dataWithImage:[UIImage imageNamed:@"halloween.jpg"] date:[NSDate dateWithTimeIntervalSinceNow:-290] type:BubbleTypeSomeoneElse];
+    SGBubbleData *photoBubble = [SGBubbleData dataWithImage:[UIImage imageNamed:@"halloween.jpg"] date:[NSDate dateWithTimeIntervalSinceNow:-290] direction:SGBubbleDirectionLeft];
     photoBubble.avatar = [UIImage imageNamed:@"avatar1.png"];
     
-    SGBubbleData *replyBubble = [SGBubbleData dataWithText:@"Wow.. Really cool picture out there. iPhone 5 has really nice camera, yeah?" date:[NSDate dateWithTimeIntervalSinceNow:-5] type:BubbleTypeMine];
+    SGBubbleData *replyBubble = [SGBubbleData dataWithText:@"Wow.. Really cool picture out there. iPhone 5 has really nice camera, yeah?" date:[NSDate dateWithTimeIntervalSinceNow:-5] direction:SGBubbleDirectionRight];
     replyBubble.avatar = nil;
     
     bubbleData = [[NSMutableArray alloc] initWithObjects:heyBubble, photoBubble, replyBubble, nil];
@@ -174,7 +174,7 @@
 {
     self.bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
 
-    SGBubbleData *sayBubble = [SGBubbleData dataWithText:textField.text date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
+    SGBubbleData *sayBubble = [SGBubbleData dataWithText:textField.text date:[NSDate dateWithTimeIntervalSinceNow:0] direction:SGBubbleDirectionRight];
     [bubbleData addObject:sayBubble];
     [self.bubbleTable reloadData];
 

@@ -16,7 +16,7 @@
 #pragma mark - Properties
 
 @synthesize date = _date;
-@synthesize type = _type;
+@synthesize direction = _direction;
 @synthesize view = _view;
 @synthesize insets = _insets;
 @synthesize avatar = _avatar;
@@ -44,16 +44,16 @@ const UIEdgeInsets textInsetsSomeone = {5, 15, 11, 10};
 const NSInteger kMaxContentWidth = 200;
 const NSInteger kMaxContentHeight = 9999;
 
-+ (id)dataWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type
++ (id)dataWithText:(NSString *)text date:(NSDate *)date direction:(SGBubbleDirection)direction
 {
 #if !__has_feature(objc_arc)
-    return [[[SGBubbleData alloc] initWithText:text date:date type:type] autorelease];
+    return [[[SGBubbleData alloc] initWithText:text date:date direction:direction] autorelease];
 #else
-    return [[SGBubbleData alloc] initWithText:text date:date type:type];
+    return [[SGBubbleData alloc] initWithText:text date:date direction:direction];
 #endif    
 }
 
-- (id)initWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type
+- (id)initWithText:(NSString *)text date:(NSDate *)date direction:(SGBubbleDirection)direction
 {
     if (!text) text = @"";
     UIFont *font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
@@ -72,8 +72,8 @@ const NSInteger kMaxContentHeight = 9999;
     [label autorelease];
 #endif
     
-    UIEdgeInsets insets = (type == BubbleTypeMine ? textInsetsMine : textInsetsSomeone);
-    return [self initWithView:label date:date type:type insets:insets];
+    UIEdgeInsets insets = (direction == SGBubbleDirectionRight ? textInsetsMine : textInsetsSomeone);
+    return [self initWithView:label date:date direction:direction insets:insets];
 }
 
 #pragma mark - Image bubble
@@ -81,16 +81,16 @@ const NSInteger kMaxContentHeight = 9999;
 const UIEdgeInsets imageInsetsMine = {11, 13, 16, 22};
 const UIEdgeInsets imageInsetsSomeone = {11, 18, 16, 14};
 
-+ (id)dataWithImage:(UIImage *)image date:(NSDate *)date type:(NSBubbleType)type
++ (id)dataWithImage:(UIImage *)image date:(NSDate *)date direction:(SGBubbleDirection)direction
 {
 #if !__has_feature(objc_arc)
-    return [[[SGBubbleData alloc] initWithImage:image date:date type:type] autorelease];
+    return [[[SGBubbleData alloc] initWithImage:image date:date direction:direction] autorelease];
 #else
-    return [[SGBubbleData alloc] initWithImage:image date:date type:type];
+    return [[SGBubbleData alloc] initWithImage:image date:date direction:direction];
 #endif    
 }
 
-- (id)initWithImage:(UIImage *)image date:(NSDate *)date type:(NSBubbleType)type
+- (id)initWithImage:(UIImage *)image date:(NSDate *)date direction:(SGBubbleDirection)direction
 {
     CGSize size = image.size;
     if (size.width > kMaxContentWidth)
@@ -108,22 +108,22 @@ const UIEdgeInsets imageInsetsSomeone = {11, 18, 16, 14};
     [imageView autorelease];
 #endif
     
-    UIEdgeInsets insets = (type == BubbleTypeMine ? imageInsetsMine : imageInsetsSomeone);
-    return [self initWithView:imageView date:date type:type insets:insets];       
+    UIEdgeInsets insets = (direction == SGBubbleDirectionRight ? imageInsetsMine : imageInsetsSomeone);
+    return [self initWithView:imageView date:date direction:direction insets:insets];       
 }
 
 #pragma mark - Custom view bubble
 
-+ (id)dataWithView:(UIView *)view date:(NSDate *)date type:(NSBubbleType)type insets:(UIEdgeInsets)insets
++ (id)dataWithView:(UIView *)view date:(NSDate *)date direction:(SGBubbleDirection)direction insets:(UIEdgeInsets)insets
 {
 #if !__has_feature(objc_arc)
-    return [[[SGBubbleData alloc] initWithView:view date:date type:type insets:insets] autorelease];
+    return [[[SGBubbleData alloc] initWithView:view date:date direction:direction insets:insets] autorelease];
 #else
-    return [[SGBubbleData alloc] initWithView:view date:date type:type insets:insets];
+    return [[SGBubbleData alloc] initWithView:view date:date direction:direction insets:insets];
 #endif    
 }
 
-- (id)initWithView:(UIView *)view date:(NSDate *)date type:(NSBubbleType)type insets:(UIEdgeInsets)insets  
+- (id)initWithView:(UIView *)view date:(NSDate *)date direction:(SGBubbleDirection)direction insets:(UIEdgeInsets)insets  
 {
     self = [super init];
     if (self)
@@ -134,7 +134,7 @@ const UIEdgeInsets imageInsetsSomeone = {11, 18, 16, 14};
         [view retain];
         [date retain];
 #endif
-        _type = type;
+        _direction = direction;
         _insets = insets;
     }
     return self;

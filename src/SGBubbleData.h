@@ -10,25 +10,30 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum _NSBubbleType
+#ifndef NS_ENUM
+#define NS_ENUM(_type, _name) enum _name : _type _name; enum _name : _type
+#endif
+
+typedef NS_ENUM(NSInteger, SGBubbleDirection)
 {
-    BubbleTypeMine = 0,
-    BubbleTypeSomeoneElse = 1
-} NSBubbleType;
+    SGBubbleDirectionRight,
+    SGBubbleDirectionLeft
+};
+
 
 @interface SGBubbleData : NSObject
 
 @property (readonly, nonatomic, strong) NSDate *date;
-@property (readonly, nonatomic) NSBubbleType type;
+@property (readonly, nonatomic) SGBubbleDirection direction;
 @property (readonly, nonatomic, strong) UIView *view;
 @property (readonly, nonatomic) UIEdgeInsets insets;
 @property (nonatomic, strong) UIImage *avatar;
 
-- (id)initWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type;
-+ (id)dataWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type;
-- (id)initWithImage:(UIImage *)image date:(NSDate *)date type:(NSBubbleType)type;
-+ (id)dataWithImage:(UIImage *)image date:(NSDate *)date type:(NSBubbleType)type;
-- (id)initWithView:(UIView *)view date:(NSDate *)date type:(NSBubbleType)type insets:(UIEdgeInsets)insets;
-+ (id)dataWithView:(UIView *)view date:(NSDate *)date type:(NSBubbleType)type insets:(UIEdgeInsets)insets;
+- (id)initWithText:(NSString *)text date:(NSDate *)date direction:(SGBubbleDirection)direction;
++ (id)dataWithText:(NSString *)text date:(NSDate *)date direction:(SGBubbleDirection)direction;
+- (id)initWithImage:(UIImage *)image date:(NSDate *)date direction:(SGBubbleDirection)direction;
++ (id)dataWithImage:(UIImage *)image date:(NSDate *)date direction:(SGBubbleDirection)direction;
+- (id)initWithView:(UIView *)view date:(NSDate *)date direction:(SGBubbleDirection)direction insets:(UIEdgeInsets)insets;
++ (id)dataWithView:(UIView *)view date:(NSDate *)date direction:(SGBubbleDirection)direction insets:(UIEdgeInsets)insets;
 
 @end
