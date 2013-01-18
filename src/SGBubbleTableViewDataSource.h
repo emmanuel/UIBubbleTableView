@@ -12,13 +12,21 @@
 
 @class SGBubbleData;
 @class SGBubbleTableView;
-@protocol SGBubbleTableViewDataSource <NSObject>
+@class SGBubbleTableViewContentCell;
+@class SGBubbleTableViewHeaderCell;
+@class SGBubbleTableViewTypingCell;
 
-@optional
+@protocol SGBubbleTableViewDataSource <NSObject>
 
 @required
 
 - (NSInteger)numberOfRowsForBubbleTableView:(SGBubbleTableView *)tableView;
 - (SGBubbleData *)bubbleTableView:(SGBubbleTableView *)tableView dataForRow:(NSInteger)row;
+
+@optional
+
+- (SGBubbleTableViewContentCell *)contentCellForBubbleTableView:(SGBubbleTableView *)bubbleTableView withBubbleData:(SGBubbleData *)bubbleData;
+- (SGBubbleTableViewHeaderCell *)headerCellForBubbleTableView:(SGBubbleTableView *)bubbleTableView withBubbleData:(SGBubbleData *)bubbleData;
+- (SGBubbleTableViewTypingCell *)typingCellForBubbleTableView:(SGBubbleTableView *)bubbleTableView;
 
 @end

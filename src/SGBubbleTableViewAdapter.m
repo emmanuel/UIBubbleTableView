@@ -19,6 +19,10 @@
 
 @implementation SGBubbleTableViewAdapter
 
+@synthesize delegate = _delegate;
+@synthesize bubbleDataSource = _bubbleDataSource;
+@synthesize bubbleTableView = _bubbleTableView;
+
 #pragma mark - Initializer
 
 - (id)initWithBubbleTableView:(SGBubbleTableView *)bubbleTableView
@@ -60,8 +64,8 @@
 - (void)dealloc
 {
     [self.bubbleSections release];
-	self.bubbleSections = nil;
-	self.bubbleDataSource = nil;
+    self.bubbleSections = nil;
+    self.bubbleDataSource = nil;
     [super dealloc];
 }
 #endif
@@ -86,42 +90,74 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Now typing
-    if (indexPath.section >= [self.bubbleSections count])
+    if (tableView == self.bubbleTableView)
     {
-        static NSString *cellId = @"tblBubbleTypingCell";
-        SGBubbleTableViewTypingCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-        
-        if (cell == nil) cell = [[SGBubbleTableViewTypingCell alloc] init];
-        
-        cell.type = self.typingBubble;
-        cell.showAvatar = self.showAvatars;
-        
-        return cell;
+        SGBubbleTableView *bubbleTableView = (SGBubbleTableView *)tableView;
+        if (indexPath.section >= [self.bubbleSections count])
+        {
+            return [self typingCellForBubbleTableView:bubbleTableView];
+        }
+        else if (indexPath.row == 0)
+        {
+            SGBubbleData *bubbleData = self.bubbleSections[indexPath.section][0];
+            return [self headerCellForBubbleTableView:bubbleTableView withBubbleData:bubbleData];
+        }
+        else
+        {
+            SGBubbleData *bubbleData = self.bubbleSections[indexPath.section][indexPath.row - 1];
+            return [self contentCellForBubbleTableView:bubbleTableView withBubbleData:bubbleData];
+        }
     }
-    
-    // Header with date and time
-    if (indexPath.row == 0)
+
+    return nil;
+}
+
+- (SGBubbleTableViewContentCell *)contentCellForBubbleTableView:(SGBubbleTableView *)bubbleTableView withBubbleData:(SGBubbleData *)bubbleData
+{
+    if ([self.bubbleDataSource respondsToSelector:@selector(contentCellForBubbleTableView:withBubbleData:)])
     {
-        static NSString *cellId = @"tblBubbleHeaderCell";
-        SGBubbleTableViewHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-        SGBubbleData *data = [[self.bubbleSections objectAtIndex:indexPath.section] objectAtIndex:0];
-        
-        if (cell == nil) cell = [[SGBubbleTableViewHeaderCell alloc] init];
-        
-        cell.date = data.date;
-        
-        return cell;
+        return [self.bubbleDataSource contentCellForBubbleTableView:bubbleTableView withBubbleData:bubbleData];
     }
-    
-    // Standard bubble
+
     static NSString *cellId = @"tblBubbleCell";
-    SGBubbleTableViewContentCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    SGBubbleData *data = [[self.bubbleSections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row - 1];
+    SGBubbleTableViewContentCell *cell = [bubbleTableView dequeueReusableCellWithIdentifier:cellId];
     
     if (cell == nil) cell = [[SGBubbleTableViewContentCell alloc] init];
     
-    cell.data = data;
+    cell.data = bubbleData;
+    cell.showAvatar = self.showAvatars;
+    
+    return cell;
+}
+
+- (SGBubbleTableViewHeaderCell *)headerCellForBubbleTableView:(SGBubbleTableView *)bubbleTableView withBubbleData:(SGBubbleData *)bubbleData
+{
+    if ([self.bubbleDataSource respondsToSelector:@selector(headerCellForBubbleTableView:withBubbleData:)])
+    {
+        return [self.bubbleDataSource headerCellForBubbleTableView:bubbleTableView withBubbleData:bubbleData];
+    }
+    static NSString *cellId = @"tblBubbleHeaderCell";
+    SGBubbleTableViewHeaderCell *cell = [bubbleTableView dequeueReusableCellWithIdentifier:cellId];
+
+    if (cell == nil) cell = [[SGBubbleTableViewHeaderCell alloc] init];
+
+    cell.date = bubbleData.date;
+
+    return cell;
+}
+
+- (SGBubbleTableViewTypingCell *)typingCellForBubbleTableView:(SGBubbleTableView *)bubbleTableView
+{
+    if ([self.bubbleDataSource respondsToSelector:@selector(typingCellForBubbleTableView:)])
+    {
+        return [self.bubbleDataSource typingCellForBubbleTableView:bubbleTableView];
+    }
+    static NSString * const cellId = @"tblBubbleTypingCell";
+    SGBubbleTableViewTypingCell *cell = [bubbleTableView dequeueReusableCellWithIdentifier:cellId];
+    
+    if (cell == nil) cell = [[SGBubbleTableViewTypingCell alloc] init];
+    
+    cell.type = self.typingBubble;
     cell.showAvatar = self.showAvatars;
     
     return cell;
