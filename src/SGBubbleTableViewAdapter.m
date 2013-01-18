@@ -85,7 +85,7 @@
     // This is for now typing bubble
 	if (section >= [self.bubbleSections count]) return 1;
     
-    return [[self.bubbleSections objectAtIndex:section] count] + 1;
+    return [self.bubbleSections[section] count] + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -179,7 +179,7 @@
         return [SGBubbleTableViewHeaderCell height];
     }
     
-    SGBubbleData *data = [[self.bubbleSections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row - 1];
+    SGBubbleData *data = self.bubbleSections[indexPath.section][indexPath.row - 1];
     return MAX(data.insets.top + data.view.frame.size.height + data.insets.bottom, self.showAvatars ? 52 : 0);
 }
 
@@ -224,7 +224,7 @@
 
         for (int i = 0; i < count; i++)
         {
-            SGBubbleData *data = (SGBubbleData *)[bubbleData objectAtIndex:i];
+            SGBubbleData *data = (SGBubbleData *)bubbleData[i];
             
             if ([data.date timeIntervalSinceDate:last] > self.snapInterval)
             {
