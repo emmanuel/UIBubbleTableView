@@ -15,12 +15,6 @@
 
 #pragma mark - Properties
 
-@synthesize date = _date;
-@synthesize direction = _direction;
-@synthesize view = _view;
-@synthesize insets = _insets;
-@synthesize avatarImage = _avatar;
-
 #pragma mark - Lifecycle
 
 #if !__has_feature(objc_arc)
@@ -138,6 +132,26 @@ const UIEdgeInsets imageInsetsSomeone = {11, 18, 16, 14};
         _insets = insets;
     }
     return self;
+}
+
+- (CGFloat)contentWidth
+{
+    return self.view.frame.size.width;
+}
+
+- (CGFloat)contentHeight
+{
+    return self.view.frame.size.height;
+}
+
+- (CGFloat)totalWidth
+{
+    return [self contentWidth] + self.insets.left + self.insets.right;
+}
+
+- (CGFloat)totalHeight
+{
+    return [self contentHeight] + self.insets.top + self.insets.bottom;
 }
 
 @end

@@ -29,11 +29,17 @@ typedef NS_ENUM(NSInteger, SGBubbleDirection)
 @property (readonly, nonatomic) UIEdgeInsets insets;
 @property (nonatomic, strong) UIImage *avatarImage;
 
-- (id)initWithText:(NSString *)text date:(NSDate *)date direction:(SGBubbleDirection)direction;
 + (id)dataWithText:(NSString *)text date:(NSDate *)date direction:(SGBubbleDirection)direction;
-- (id)initWithImage:(UIImage *)image date:(NSDate *)date direction:(SGBubbleDirection)direction;
 + (id)dataWithImage:(UIImage *)image date:(NSDate *)date direction:(SGBubbleDirection)direction;
-- (id)initWithView:(UIView *)view date:(NSDate *)date direction:(SGBubbleDirection)direction insets:(UIEdgeInsets)insets;
 + (id)dataWithView:(UIView *)view date:(NSDate *)date direction:(SGBubbleDirection)direction insets:(UIEdgeInsets)insets;
+
+- (id)initWithText:(NSString *)text date:(NSDate *)date direction:(SGBubbleDirection)direction;
+- (id)initWithImage:(UIImage *)image date:(NSDate *)date direction:(SGBubbleDirection)direction;
+- (id)initWithView:(UIView *)view date:(NSDate *)date direction:(SGBubbleDirection)direction insets:(UIEdgeInsets)insets;
+
+- (CGFloat)contentWidth;
+- (CGFloat)contentHeight;
+- (CGFloat)totalWidth;
+- (CGFloat)totalHeight;
 
 @end
