@@ -9,11 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "SGBubbleTableViewDataSource.h"
 
-typedef enum NSBubbleTypingType : NSInteger NSBubbleTypingType; enum NSBubbleTypingType : NSInteger
+#ifndef NS_ENUM
+#define NS_ENUM(_type, _name) enum _name : _type _name; enum _name : _type
+#endif
+
+typedef NS_ENUM(NSInteger, SGBubbleTypingDirection)
 {
-    NSBubbleTypingTypeNobody,
-    NSBubbleTypingTypeMe,
-    NSBubbleTypingTypeSomebody
+    SGBubbleTypingDirectionNone,
+    SGBubbleTypingDirectionRight,
+    SGBubbleTypingDirectionLeft,
 };
 
 @protocol SGBubbleTableViewAdapterProtocol <UITableViewDelegate, UITableViewDataSource>
@@ -22,7 +26,7 @@ typedef enum NSBubbleTypingType : NSInteger NSBubbleTypingType; enum NSBubbleTyp
 @property (nonatomic, weak) id<SGBubbleTableViewDataSource> bubbleDataSource;
 
 @property (nonatomic, assign) NSTimeInterval snapInterval;
-@property (nonatomic, assign) NSBubbleTypingType typingBubble;
+@property (nonatomic, assign) SGBubbleTypingDirection typingBubble;
 @property (nonatomic, assign) BOOL showAvatars;
 
 @required

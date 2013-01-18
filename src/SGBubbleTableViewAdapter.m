@@ -37,7 +37,7 @@
         [self.bubbleSections autorelease];
 #endif
         self.snapInterval = 120;
-        self.typingBubble = NSBubbleTypingTypeNobody;
+        self.typingBubble = SGBubbleTypingDirectionNone;
     }
 
     return self;
@@ -75,7 +75,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     int result = [self.bubbleSections count];
-    if (NSBubbleTypingTypeNobody != self.typingBubble) result++;
+    if (SGBubbleTypingDirectionNone != self.typingBubble) result++;
 
     return result;
 }

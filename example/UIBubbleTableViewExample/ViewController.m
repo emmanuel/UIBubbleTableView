@@ -69,11 +69,11 @@
     
     // Uncomment the line below to add "Now typing" bubble
     // Possible values are
-    //    - NSBubbleTypingTypeSomebody - shows "now typing" bubble on the left
-    //    - NSBubbleTypingTypeMe - shows "now typing" bubble on the right
-    //    - NSBubbleTypingTypeNone - no "now typing" bubble
+    //    - SGBubbleTypingDirectionLeft - shows "now typing" bubble on the left
+    //    - SGBubbleTypingDirectionRight - shows "now typing" bubble on the right
+    //    - SGBubbleTypingDirectionNone - no "now typing" bubble
     
-    self.bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
+    self.bubbleTable.typingBubble = SGBubbleTypingDirectionLeft;
     
     [self.bubbleTable reloadData];
     
@@ -172,7 +172,7 @@
 
 - (IBAction)sayPressed:(id)sender
 {
-    self.bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
+    self.bubbleTable.typingBubble = SGBubbleTypingDirectionNone;
 
     SGBubbleData *sayBubble = [SGBubbleData dataWithText:textField.text date:[NSDate dateWithTimeIntervalSinceNow:0] direction:SGBubbleDirectionRight];
     [bubbleData addObject:sayBubble];

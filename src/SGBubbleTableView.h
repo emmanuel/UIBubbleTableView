@@ -24,7 +24,7 @@
 
 @property (nonatomic) NSTimeInterval snapInterval;
 @property (nonatomic) BOOL showAvatars;
-@property (nonatomic) NSBubbleTypingType typingBubble;
+@property (nonatomic) SGBubbleTypingDirection typingBubble;
 
 #pragma mark UIAppearanceContainerProtocol hooks
 

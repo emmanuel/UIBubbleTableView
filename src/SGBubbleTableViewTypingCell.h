@@ -14,7 +14,7 @@
 
 + (CGFloat)height;
 
-@property (nonatomic) NSBubbleTypingType type;
+@property (nonatomic) SGBubbleTypingDirection type;
 @property (nonatomic) BOOL showAvatar;
 
 @end

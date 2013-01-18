@@ -16,7 +16,7 @@
 @property (nonatomic, assign) id<SGBubbleTableViewDataSource> bubbleDataSource;
 
 @property (nonatomic, assign) NSTimeInterval snapInterval;
-@property (nonatomic, assign) NSBubbleTypingType typingBubble;
+@property (nonatomic, assign) SGBubbleTypingDirection typingBubble;
 @property (nonatomic, assign) BOOL showAvatars;
 
 @property (nonatomic, assign) SGBubbleTableView *bubbleTableView;

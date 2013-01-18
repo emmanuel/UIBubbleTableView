@@ -25,7 +25,7 @@
     return 40.0;
 }
 
-- (void)setType:(NSBubbleTypingType)value
+- (void)setType:(SGBubbleTypingDirection)value
 {
     if (!self.typingImageView)
     {
@@ -38,7 +38,7 @@
     UIImage *bubbleImage = nil;
     CGFloat x = 0;
     
-    if (value == NSBubbleTypingTypeMe)
+    if (value == SGBubbleTypingDirectionRight)
     {
         bubbleImage = [UIImage imageNamed:@"typingMine.png"]; 
         x = self.frame.size.width - bubbleImage.size.width;
