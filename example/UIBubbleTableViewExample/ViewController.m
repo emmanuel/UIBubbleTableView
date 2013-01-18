@@ -87,8 +87,8 @@
     
     // Keyboard events
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -122,7 +122,7 @@
 
 #pragma mark - Keyboard events
 
-- (void)keyboardWasShown:(NSNotification*)aNotification
+- (void)keyboardWillShow:(NSNotification*)aNotification
 {
     NSDictionary* info = [aNotification userInfo];
     CGFloat keyboardHeight = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
@@ -136,7 +136,7 @@
         CGRect frame = self.textInputView.frame;
         frame.origin.y -= keyboardHeight;
         self.textInputView.frame = frame;
-        
+
         frame = self.bubbleTable.frame;
         // TODO: keep the bottom of the visible area of the bubble table in view as the keyboard slides up
         // One solution is to leave the origin unchanged and animate the bubble table height
@@ -154,7 +154,7 @@
     } completion:nil];
 }
 
-- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+- (void)keyboardWillHide:(NSNotification*)aNotification
 {
     NSDictionary* info = [aNotification userInfo];
     CGFloat keyboardHeight = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
