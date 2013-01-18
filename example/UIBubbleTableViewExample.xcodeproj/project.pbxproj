@@ -102,7 +102,9 @@
 				76ED206115BF096C00E186D3 /* Frameworks */,
 				76ED205F15BF096C00E186D3 /* Products */,
 			);
+			indentWidth = 4;
 			sourceTree = "<group>";
+			tabWidth = 4;
 		};
 		76ED205F15BF096C00E186D3 /* Products */ = {
 			isa = PBXGroup;
