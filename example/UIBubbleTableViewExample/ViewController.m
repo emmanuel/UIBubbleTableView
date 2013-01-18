@@ -20,15 +20,11 @@
 #import "SGBubbleData.h"
 
 @interface ViewController ()
-{
-    IBOutlet SGBubbleTableView *bubbleTable;
-    IBOutlet UIView *textInputView;
-    IBOutlet UITextField *textField;
-
-    NSMutableArray *bubbleData;
-}
 
 @property (nonatomic, weak) IBOutlet SGBubbleTableView *bubbleTable;
+@property (nonatomic, weak) IBOutlet UIView *textInputView;
+@property (nonatomic, weak) IBOutlet UITextField *textField;
+@property (nonatomic, strong) NSMutableArray *bubbleData;
 
 - (void)scrollToLastBubbleAnimated:(BOOL)animated;
 - (NSIndexPath *)indexPathForLastBubble;
@@ -37,22 +33,34 @@
 
 @implementation ViewController
 
+- (NSArray *)staticBubbleData
+{
+    SGBubbleData *heyBubble = [SGBubbleData dataWithText:@"Hey, halloween is soon"
+                                                    date:[NSDate dateWithTimeIntervalSinceNow:-300]
+                                               direction:SGBubbleDirectionLeft];
+    heyBubble.avatarImage = [UIImage imageNamed:@"avatar1.png"];
+    
+    SGBubbleData *photoBubble = [SGBubbleData dataWithImage:[UIImage imageNamed:@"halloween.jpg"]
+                                                       date:[NSDate dateWithTimeIntervalSinceNow:-290]
+                                                  direction:SGBubbleDirectionLeft];
+    photoBubble.avatarImage = [UIImage imageNamed:@"avatar1.png"];
+
+    NSString *replyBubbleText = @"Wow.. Really cool picture out there. iPhone 5 has really nice camera, yeah?";
+    SGBubbleData *replyBubble = [SGBubbleData dataWithText:replyBubbleText
+                                                      date:[NSDate dateWithTimeIntervalSinceNow:-5]
+                                                 direction:SGBubbleDirectionRight];
+    replyBubble.avatarImage = nil;
+    
+    return @[heyBubble, photoBubble, replyBubble];
+}
+
 - (void)viewDidLoad
 {
     [[SGBubbleTableView appearance] setBackgroundColor:[UIColor lightGrayColor]];
 
     [super viewDidLoad];
-    
-    SGBubbleData *heyBubble = [SGBubbleData dataWithText:@"Hey, halloween is soon" date:[NSDate dateWithTimeIntervalSinceNow:-300] direction:SGBubbleDirectionLeft];
-    heyBubble.avatar = [UIImage imageNamed:@"avatar1.png"];
 
-    SGBubbleData *photoBubble = [SGBubbleData dataWithImage:[UIImage imageNamed:@"halloween.jpg"] date:[NSDate dateWithTimeIntervalSinceNow:-290] direction:SGBubbleDirectionLeft];
-    photoBubble.avatar = [UIImage imageNamed:@"avatar1.png"];
-    
-    SGBubbleData *replyBubble = [SGBubbleData dataWithText:@"Wow.. Really cool picture out there. iPhone 5 has really nice camera, yeah?" date:[NSDate dateWithTimeIntervalSinceNow:-5] direction:SGBubbleDirectionRight];
-    replyBubble.avatar = nil;
-    
-    bubbleData = [[NSMutableArray alloc] initWithObjects:heyBubble, photoBubble, replyBubble, nil];
+    self.bubbleData = [[self staticBubbleData] mutableCopy];
 
     self.bubbleTable.bubbleDataSource = self;
 
@@ -94,21 +102,21 @@
 
 - (NSInteger)numberOfRowsForBubbleTableView:(SGBubbleTableView *)tableView
 {
-    return [bubbleData count];
+    return [self.bubbleData count];
 }
 
 - (SGBubbleData *)bubbleTableView:(SGBubbleTableView *)tableView dataForRow:(NSInteger)row
 {
-    return [bubbleData objectAtIndex:row];
+    return self.bubbleData[row];
 }
 
 #pragma mark - UIScrollView implementation
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    if (scrollView == self.bubbleTable && [textField isFirstResponder])
+    if (scrollView == self.bubbleTable)
     {
-        [textField resignFirstResponder];
+        [self.textInputView endEditing:YES];
     }
 }
 
@@ -125,9 +133,9 @@
     // TODO: Need to translate the bounds to account for rotation (correct?)
     
     [UIView animateWithDuration:duration delay:0 options:options animations:^{
-        CGRect frame = textInputView.frame;
+        CGRect frame = self.textInputView.frame;
         frame.origin.y -= keyboardHeight;
-        textInputView.frame = frame;
+        self.textInputView.frame = frame;
         
         frame = self.bubbleTable.frame;
         // TODO: keep the bottom of the visible area of the bubble table in view as the keyboard slides up
@@ -155,9 +163,9 @@
     NSInteger options = UIViewAnimationOptionBeginFromCurrentState | animationCurve;
 
     [UIView animateWithDuration:duration delay:0 options:options animations:^{
-        CGRect frame = textInputView.frame;
+        CGRect frame = self.textInputView.frame;
         frame.origin.y += keyboardHeight;
-        textInputView.frame = frame;
+        self.textInputView.frame = frame;
         
         frame = self.bubbleTable.frame;
 //        frame.size.height += keyboardHeight;
@@ -174,12 +182,12 @@
 {
     self.bubbleTable.typingBubble = SGBubbleTypingDirectionNone;
 
-    SGBubbleData *sayBubble = [SGBubbleData dataWithText:textField.text date:[NSDate dateWithTimeIntervalSinceNow:0] direction:SGBubbleDirectionRight];
-    [bubbleData addObject:sayBubble];
+    SGBubbleData *sayBubble = [SGBubbleData dataWithText:self.textField.text date:[NSDate dateWithTimeIntervalSinceNow:0] direction:SGBubbleDirectionRight];
+    [self.bubbleData addObject:sayBubble];
     [self.bubbleTable reloadData];
 
-    textField.text = @"";
-    [textField resignFirstResponder];
+    self.textField.text = @"";
+    [self.textField resignFirstResponder];
 }
 
 #pragma mark Helpers
