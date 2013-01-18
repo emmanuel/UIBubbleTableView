@@ -27,7 +27,7 @@ typedef NS_ENUM(NSInteger, SGBubbleDirection)
 @property (readonly, nonatomic) SGBubbleDirection direction;
 @property (readonly, nonatomic, strong) UIView *view;
 @property (readonly, nonatomic) UIEdgeInsets insets;
-@property (nonatomic, strong) UIImage *avatar;
+@property (nonatomic, strong) UIImage *avatarImage;
 
 - (id)initWithText:(NSString *)text date:(NSDate *)date direction:(SGBubbleDirection)direction;
 + (id)dataWithText:(NSString *)text date:(NSDate *)date direction:(SGBubbleDirection)direction;

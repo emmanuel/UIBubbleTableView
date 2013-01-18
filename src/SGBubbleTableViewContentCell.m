@@ -78,7 +78,7 @@
     if (self.showAvatar)
     {
         [self.avatarImage removeFromSuperview];
-        self.avatarImage = [[UIImageView alloc] initWithImage:(self.data.avatar ? self.data.avatar : [UIImage imageNamed:@"missingAvatar.png"])];
+        self.avatarImage = [[UIImageView alloc] initWithImage:(self.data.avatarImage ? self.data.avatarImage : [UIImage imageNamed:@"missingAvatar.png"])];
 #if !__has_feature(objc_arc)
         [self.avatarImage autorelease];
 #endif

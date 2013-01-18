@@ -19,7 +19,7 @@
 @synthesize direction = _direction;
 @synthesize view = _view;
 @synthesize insets = _insets;
-@synthesize avatar = _avatar;
+@synthesize avatarImage = _avatar;
 
 #pragma mark - Lifecycle
 
@@ -31,7 +31,7 @@
     [_view release];
     _view = nil;
     
-    self.avatar = nil;
+    self.avatarImage = nil;
 
     [super dealloc];
 }
