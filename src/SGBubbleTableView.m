@@ -17,8 +17,6 @@
 
 @property (nonatomic, retain) NSMutableArray *bubbleSection;
 
-- (id<UITableViewDelegate, UITableViewDataSource, SGBubbleTableViewAdapterProtocol>)createAdapter;
-
 @end
 
 @implementation SGBubbleTableView
@@ -133,7 +131,7 @@
     [self.adapter setDelegate:delegate];
 }
 
-- (void)setAdapter:(id<UITableViewDelegate, UITableViewDataSource, SGBubbleTableViewAdapterProtocol>)adapter
+- (void)setAdapter:(id<SGBubbleTableViewAdapterProtocol>)adapter
 {
     _adapter = adapter;
     [super setDelegate:adapter];
@@ -190,7 +188,7 @@
 
 #pragma mark - Helpers
 
-- (id<UITableViewDelegate, UITableViewDataSource, SGBubbleTableViewAdapterProtocol>)createAdapter
+- (id<SGBubbleTableViewAdapterProtocol>)createAdapter
 {
     return [[SGBubbleTableViewAdapter alloc] initWithBubbleTableView:self];
 }

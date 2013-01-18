@@ -16,7 +16,7 @@
 
 @interface SGBubbleTableView : UITableView
 
-@property (nonatomic, strong) id<UITableViewDelegate, UITableViewDataSource, SGBubbleTableViewAdapterProtocol> adapter;
+@property (nonatomic, strong) id<SGBubbleTableViewAdapterProtocol> adapter;
 
 #pragma mark Compiler hints
 

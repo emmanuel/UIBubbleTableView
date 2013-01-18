@@ -39,7 +39,7 @@
 
 /* Begin PBXFileReference section */
 		148B2D64169C39B5005C6E24 /* SGBubbleTableViewAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGBubbleTableViewAdapter.h; path = ../../src/SGBubbleTableViewAdapter.h; sourceTree = "<group>"; };
-		148B2D65169C39B5005C6E24 /* SGBubbleTableViewAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGBubbleTableViewAdapter.m; path = ../../src/SGBubbleTableViewAdapter.m; sourceTree = "<group>"; };
+		148B2D65169C39B5005C6E24 /* SGBubbleTableViewAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SGBubbleTableViewAdapter.m; path = ../../src/SGBubbleTableViewAdapter.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		148B2D82169E2489005C6E24 /* SGBubbleTableViewAdapterProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGBubbleTableViewAdapterProtocol.h; path = ../../src/SGBubbleTableViewAdapterProtocol.h; sourceTree = "<group>"; };
 		76687AFB1622039C00707588 /* SGBubbleTableViewTypingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGBubbleTableViewTypingCell.h; path = ../../src/SGBubbleTableViewTypingCell.h; sourceTree = "<group>"; };
 		76687AFC1622039C00707588 /* SGBubbleTableViewTypingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGBubbleTableViewTypingCell.m; path = ../../src/SGBubbleTableViewTypingCell.m; sourceTree = "<group>"; };
@@ -57,7 +57,7 @@
 		76ED207115BF096C00E186D3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		76ED207215BF096C00E186D3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		76ED207415BF096C00E186D3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		76ED207515BF096C00E186D3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		76ED207515BF096C00E186D3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		76ED207815BF096C00E186D3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
 		76ED208515BF09E300E186D3 /* SGBubbleTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGBubbleTableView.h; path = ../../src/SGBubbleTableView.h; sourceTree = "<group>"; };
 		76ED208615BF09E300E186D3 /* SGBubbleTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGBubbleTableView.m; path = ../../src/SGBubbleTableView.m; sourceTree = "<group>"; };

@@ -16,7 +16,7 @@ typedef enum NSBubbleTypingType : NSInteger NSBubbleTypingType; enum NSBubbleTyp
     NSBubbleTypingTypeSomebody
 };
 
-@protocol SGBubbleTableViewAdapterProtocol <NSObject>
+@protocol SGBubbleTableViewAdapterProtocol <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, weak) id<UITableViewDelegate> delegate;
 @property (nonatomic, weak) id<SGBubbleTableViewDataSource> bubbleDataSource;
