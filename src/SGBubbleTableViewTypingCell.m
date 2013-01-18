@@ -8,6 +8,10 @@
 
 #import "SGBubbleTableViewTypingCell.h"
 
+static int const kSGBubbleTableViewTypingCellOffsetY = 4;
+static int const kSGBubbleTableViewTypingCellWidth = 73;
+static int const kSGBubbleTableViewTypingCellHeight = 31;
+
 @interface SGBubbleTableViewTypingCell ()
 
 @property (nonatomic, retain) UIImageView *typingImageView;
@@ -50,7 +54,7 @@
     }
     
     self.typingImageView.image = bubbleImage;
-    self.typingImageView.frame = CGRectMake(x, 4, 73, 31);
+    self.typingImageView.frame = CGRectMake(x, kSGBubbleTableViewTypingCellOffsetY, kSGBubbleTableViewTypingCellWidth, kSGBubbleTableViewTypingCellHeight);
 }
 
 @end
