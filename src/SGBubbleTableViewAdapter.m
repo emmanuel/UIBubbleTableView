@@ -119,10 +119,12 @@
         return [self.bubbleDataSource contentCellForBubbleTableView:bubbleTableView withBubbleData:bubbleData];
     }
 
-    static NSString *cellId = @"tblBubbleCell";
-    SGBubbleTableViewContentCell *cell = [bubbleTableView dequeueReusableCellWithIdentifier:cellId];
+    static NSString * const cellIDLeft = @"tblBubbleContentCellLeft";
+    static NSString * const cellIDRight = @"tblBubbleContentCellRight";
+    NSString *cellID = (SGBubbleDirectionLeft == bubbleData.direction) ? cellIDLeft : cellIDRight;
+    SGBubbleTableViewContentCell *cell = [bubbleTableView dequeueReusableCellWithIdentifier:cellID];
     
-    if (cell == nil) cell = [[SGBubbleTableViewContentCell alloc] init];
+    if (cell == nil) cell = [SGBubbleTableViewContentCell cellWithDirection:bubbleData.direction reuseIdentifier:cellID];
     
     cell.data = bubbleData;
     cell.showAvatar = self.showAvatars;
@@ -152,12 +154,13 @@
     {
         return [self.bubbleDataSource typingCellForBubbleTableView:bubbleTableView];
     }
-    static NSString * const cellId = @"tblBubbleTypingCell";
-    SGBubbleTableViewTypingCell *cell = [bubbleTableView dequeueReusableCellWithIdentifier:cellId];
-    
-    if (cell == nil) cell = [[SGBubbleTableViewTypingCell alloc] init];
-    
-    cell.type = self.typingBubble;
+    static NSString * const cellIDLeft = @"tblBubbleTypingCellLeft";
+    static NSString * const cellIDRight = @"tblBubbleTypingCellRight";
+    NSString *cellID = self.typingBubble == SGBubbleTypingDirectionLeft ? cellIDLeft : cellIDRight;
+    SGBubbleTableViewTypingCell *cell = [bubbleTableView dequeueReusableCellWithIdentifier:cellID];
+
+    if (cell == nil) cell = [SGBubbleTableViewTypingCell cellWithDirection:self.typingBubble reuseIdentifier:cellID];
+
     cell.showAvatar = self.showAvatars;
     
     return cell;

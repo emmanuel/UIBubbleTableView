@@ -15,20 +15,44 @@
 @interface SGBubbleTableViewContentCell ()
 
 @property (nonatomic, retain) UIView *customView;
-@property (nonatomic, retain) UIImageView *bubbleImage;
-@property (nonatomic, retain) UIImageView *avatarImage;
+@property (nonatomic, retain) UIImageView *bubbleImageView;
+@property (nonatomic, retain) UIImageView *avatarImageView;
 
-- (void) setupInternalData;
+- (UIImage *)bubbleImage;
+- (CGRect)avatarImageViewFrame;
+- (CGFloat)bubbleImageViewFrameX;
+- (CGFloat)bubbleImageViewFrameY;
+- (CGFloat)totalAvatarWidth;
+
+- (UIImageView *)configureAvatarImageViewWithImage:(UIImage *)avatarImage;
+- (void)setupInternalData;
 
 @end
 
+static CGFloat kSGBubbleTableViewContentCellAvatarWidth = 50;
+static CGFloat kSGBubbleTableViewContentCellAvatarHorizontalSpace = 2;
+static CGFloat kSGBubbleTableViewContentCellAvatarHeight = 50;
+
 @implementation SGBubbleTableViewContentCell
 
-@synthesize data = _data;
-@synthesize customView = _customView;
-@synthesize bubbleImage = _bubbleImage;
-@synthesize showAvatar = _showAvatar;
-@synthesize avatarImage = _avatarImage;
++ (SGBubbleTableViewContentCell *)cellWithDirection:(SGBubbleDirection)direction reuseIdentifier:(NSString *)reuseIdentifier
+{
+    SGBubbleTableViewContentCell *cell = nil;
+
+    switch (direction) {
+        case SGBubbleDirectionLeft:
+            cell = [[SGBubbleTableViewContentCellLeft alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+            break;
+        case SGBubbleDirectionRight:
+            cell = [[SGBubbleTableViewContentCellRight alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+            break;
+            
+        default:
+            break;
+    }
+
+    return cell;
+}
 
 - (void)setFrame:(CGRect)frame
 {
@@ -41,8 +65,8 @@
 {
     self.data = nil;
     self.customView = nil;
-    self.bubbleImage = nil;
-    self.avatarImage = nil;
+    self.bubbleImageView = nil;
+    self.avatarImageView = nil;
     [super dealloc];
 }
 #endif
@@ -57,64 +81,141 @@
 {
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    if (!self.bubbleImage)
+    if (!self.bubbleImageView)
     {
-        self.bubbleImage = [[UIImageView alloc] init];
+        self.bubbleImageView = [[UIImageView alloc] init];
 #if !__has_feature(objc_arc)
-        [self.bubbleImage autorelease];
+        [self.bubbleImageView autorelease];
 #endif
-        [self addSubview:self.bubbleImage];
+        [self addSubview:self.bubbleImageView];
     }
 
-    SGBubbleDirection direction = self.data.direction;
-    
-    CGFloat width = self.data.view.frame.size.width;
-    CGFloat height = self.data.view.frame.size.height;
-
-    CGFloat x = (direction == SGBubbleDirectionLeft) ? 0 : self.frame.size.width - width - self.data.insets.left - self.data.insets.right;
-    CGFloat y = 0;
-    
-    // Adjusting the x coordinate for avatar
     if (self.showAvatar)
     {
-        [self.avatarImage removeFromSuperview];
-        self.avatarImage = [[UIImageView alloc] initWithImage:(self.data.avatarImage ? self.data.avatarImage : [UIImage imageNamed:@"missingAvatar.png"])];
-#if !__has_feature(objc_arc)
-        [self.avatarImage autorelease];
-#endif
-        self.avatarImage.layer.cornerRadius = 9.0;
-        self.avatarImage.layer.masksToBounds = YES;
-        self.avatarImage.layer.borderColor = [UIColor colorWithWhite:0.0 alpha:0.2].CGColor;
-        self.avatarImage.layer.borderWidth = 1.0;
-        
-        CGFloat avatarX = (direction == SGBubbleDirectionLeft) ? 2 : self.frame.size.width - 52;
-        CGFloat avatarY = self.frame.size.height - 50;
-        
-        self.avatarImage.frame = CGRectMake(avatarX, avatarY, 50, 50);
-        [self addSubview:self.avatarImage];
-        
-        CGFloat delta = self.frame.size.height - (self.data.insets.top + self.data.insets.bottom + self.data.view.frame.size.height);
-        if (delta > 0) y = delta;
-        
-        if (direction == SGBubbleDirectionLeft) x += 54;
-        if (direction == SGBubbleDirectionRight) x -= 54;
+        [self.avatarImageView removeFromSuperview];
+        UIImage *avatarImage = self.data.avatarImage ?: [UIImage imageNamed:@"missingAvatar.png"];
+        self.avatarImageView = [self configureAvatarImageViewWithImage:avatarImage];
+        self.avatarImageView.frame = [self avatarImageViewFrame];
+        [self addSubview:self.avatarImageView];
     }
 
     [self.customView removeFromSuperview];
     self.customView = self.data.view;
-    self.customView.frame = CGRectMake(x + self.data.insets.left, y + self.data.insets.top, width, height);
+    self.customView.frame = CGRectMake([self bubbleImageViewFrameX] + self.data.insets.left,
+                                       [self bubbleImageViewFrameY] + self.data.insets.top,
+                                       [self.data contentWidth],
+                                       [self.data contentHeight]);
+
     [self.contentView addSubview:self.customView];
 
-    if (direction == SGBubbleDirectionLeft)
+    self.bubbleImageView.image = [self bubbleImage];
+    self.bubbleImageView.frame = CGRectMake([self bubbleImageViewFrameX],
+                                            [self bubbleImageViewFrameY],
+                                            [self.data totalWidth],
+                                            [self.data totalHeight]);
+}
+
+- (CGFloat)avatarOffsetY
+{
+    return self.frame.size.height - kSGBubbleTableViewContentCellAvatarHeight;
+}
+
+- (UIImageView *)configureAvatarImageViewWithImage:(UIImage *)avatarImage
+{
+    UIImageView *avatarImageView = [[UIImageView alloc] initWithImage:avatarImage];
+#if !__has_feature(objc_arc)
+    [avatarImageView autorelease];
+#endif
+    avatarImageView.layer.cornerRadius = 9.0;
+    avatarImageView.layer.masksToBounds = YES;
+    avatarImageView.layer.borderColor = [UIColor colorWithWhite:0.0 alpha:0.2].CGColor;
+    avatarImageView.layer.borderWidth = 1.0;
+
+    return avatarImageView;
+}
+
+- (CGFloat)totalAvatarWidth
+{
+    CGFloat x = 0;
+    if (self.showAvatar)
     {
-        self.bubbleImage.image = [[UIImage imageNamed:@"bubbleSomeone.png"] stretchableImageWithLeftCapWidth:21 topCapHeight:14];
-
+        x += kSGBubbleTableViewContentCellAvatarWidth;
+        x += 2 * kSGBubbleTableViewContentCellAvatarHorizontalSpace;
     }
-    else {
-        self.bubbleImage.image = [[UIImage imageNamed:@"bubbleMine.png"] stretchableImageWithLeftCapWidth:15 topCapHeight:14];
-    }
+    return x;
+}
 
-    self.bubbleImage.frame = CGRectMake(x, y, width + self.data.insets.left + self.data.insets.right, height + self.data.insets.top + self.data.insets.bottom);
+- (CGFloat)bubbleImageViewFrameX
+{
+    return 0;
+}
+
+- (CGFloat)bubbleImageViewFrameY
+{
+    CGFloat y = 0;
+    if (self.showAvatar)
+    {
+        CGFloat delta = self.frame.size.height - [self.data totalHeight];
+        if (delta > 0) y = delta;
+    }
+    
+    return y;
+}
+
+- (UIImage *)bubbleImage
+{
+    return nil;
+}
+
+- (CGRect)avatarImageViewFrame
+{
+    return CGRectZero;
+}
+
+@end
+
+@implementation SGBubbleTableViewContentCellLeft
+
+- (UIImage *)bubbleImage
+{
+    return [[UIImage imageNamed:@"bubbleSomeone.png"] stretchableImageWithLeftCapWidth:21 topCapHeight:14];
+//    TODO: switch to -resizableImageWithCapInsets:
+//    return [[UIImage imageNamed:@"bubbleSomeone.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(14, 21, 0, 0)];
+}
+
+- (CGFloat)bubbleImageViewFrameX
+{
+    return [self totalAvatarWidth];
+}
+
+- (CGRect)avatarImageViewFrame
+{
+    return CGRectMake(kSGBubbleTableViewContentCellAvatarHorizontalSpace,
+                      self.frame.size.height - kSGBubbleTableViewContentCellAvatarHeight,
+                      kSGBubbleTableViewContentCellAvatarWidth,
+                      kSGBubbleTableViewContentCellAvatarHeight);
+}
+
+@end
+
+@implementation SGBubbleTableViewContentCellRight
+
+- (UIImage *)bubbleImage
+{
+    return [[UIImage imageNamed:@"bubbleMine.png"] stretchableImageWithLeftCapWidth:15 topCapHeight:14];
+}
+
+- (CGFloat)bubbleImageViewFrameX
+{
+    return self.frame.size.width - [self.data totalWidth] - [self totalAvatarWidth];
+}
+
+- (CGRect)avatarImageViewFrame
+{
+    return CGRectMake(self.frame.size.width - [self totalAvatarWidth],
+                      self.frame.size.height - kSGBubbleTableViewContentCellAvatarHeight,
+                      kSGBubbleTableViewContentCellAvatarWidth,
+                      kSGBubbleTableViewContentCellAvatarHeight);
 }
 
 @end

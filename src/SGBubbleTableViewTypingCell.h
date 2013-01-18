@@ -13,8 +13,14 @@
 @interface SGBubbleTableViewTypingCell : UITableViewCell
 
 + (CGFloat)height;
++ (SGBubbleTableViewTypingCell *)cellWithDirection:(SGBubbleTypingDirection)direction reuseIdentifier:(NSString *)reuseIdentifier;
 
-@property (nonatomic) SGBubbleTypingDirection type;
 @property (nonatomic) BOOL showAvatar;
 
+@end
+
+@interface SGBubbleTableViewTypingLeftCell : SGBubbleTableViewTypingCell
+@end
+
+@interface SGBubbleTableViewTypingRightCell : SGBubbleTableViewTypingCell
 @end

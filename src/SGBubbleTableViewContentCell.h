@@ -13,7 +13,17 @@
 
 @interface SGBubbleTableViewContentCell : UITableViewCell
 
++ (SGBubbleTableViewContentCell *)cellWithDirection:(SGBubbleDirection)direction reuseIdentifier:(NSString *)reuseIdentifier;
+
 @property (nonatomic, strong) SGBubbleData *data;
 @property (nonatomic) BOOL showAvatar;
+
+@end
+
+@interface SGBubbleTableViewContentCellLeft : SGBubbleTableViewContentCell
+
+@end
+
+@interface SGBubbleTableViewContentCellRight : SGBubbleTableViewContentCell
 
 @end
