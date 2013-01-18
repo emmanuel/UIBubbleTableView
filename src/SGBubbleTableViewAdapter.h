@@ -12,14 +12,14 @@
 
 @interface SGBubbleTableViewAdapter : NSObject <UITableViewDelegate, UITableViewDataSource, SGBubbleTableViewAdapterProtocol>
 
-@property (nonatomic, weak) id<UITableViewDelegate> delegate;
-@property (nonatomic, weak) id<SGBubbleTableViewDataSource> bubbleDataSource;
+@property (nonatomic, assign) id<UITableViewDelegate> delegate;
+@property (nonatomic, assign) id<SGBubbleTableViewDataSource> bubbleDataSource;
 
 @property (nonatomic, assign) NSTimeInterval snapInterval;
 @property (nonatomic, assign) NSBubbleTypingType typingBubble;
 @property (nonatomic, assign) BOOL showAvatars;
 
-@property (nonatomic, weak) SGBubbleTableView *bubbleTableView;
+@property (nonatomic, assign) SGBubbleTableView *bubbleTableView;
 @property (nonatomic, strong) NSMutableArray *bubbleSections;
 
 - (id)initWithBubbleTableView:(SGBubbleTableView *)bubbleTableView;
