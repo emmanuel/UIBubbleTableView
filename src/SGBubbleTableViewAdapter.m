@@ -122,12 +122,12 @@
     static NSString * const cellIDLeft = @"tblBubbleContentCellLeft";
     static NSString * const cellIDRight = @"tblBubbleContentCellRight";
     NSString *cellID = (SGBubbleDirectionLeft == bubbleData.direction) ? cellIDLeft : cellIDRight;
+    if (self.showAvatars) cellID = [cellID stringByAppendingString:@"WithAvatar"];
     SGBubbleTableViewContentCell *cell = [bubbleTableView dequeueReusableCellWithIdentifier:cellID];
     
-    if (cell == nil) cell = [SGBubbleTableViewContentCell cellWithDirection:bubbleData.direction reuseIdentifier:cellID];
+    if (cell == nil) cell = [SGBubbleTableViewContentCell cellWithDirection:bubbleData.direction avatar:self.showAvatars reuseIdentifier:cellID];
     
     cell.data = bubbleData;
-    cell.showAvatar = self.showAvatars;
     
     return cell;
 }
@@ -175,15 +175,17 @@
     {
         return MAX([SGBubbleTableViewTypingCell height], self.showAvatars ? 52 : 0);
     }
-    
     // Header
-    if (indexPath.row == 0)
+    else if (indexPath.row == 0)
     {
         return [SGBubbleTableViewHeaderCell height];
     }
-    
-    SGBubbleData *data = self.bubbleSections[indexPath.section][indexPath.row - 1];
-    return MAX(data.insets.top + data.view.frame.size.height + data.insets.bottom, self.showAvatars ? 52 : 0);
+    // Content
+    else
+    {
+        SGBubbleData *data = self.bubbleSections[indexPath.section][indexPath.row - 1];
+        return MAX([data totalHeight], self.showAvatars ? 52 : 0);
+    }
 }
 
 #pragma mark - SGBubbleTableViewAdapterProtocol implementations

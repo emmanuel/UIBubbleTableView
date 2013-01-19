@@ -13,10 +13,12 @@
 
 @interface SGBubbleTableViewContentCell : UITableViewCell
 
-+ (SGBubbleTableViewContentCell *)cellWithDirection:(SGBubbleDirection)direction reuseIdentifier:(NSString *)reuseIdentifier;
-
 @property (nonatomic, strong) SGBubbleData *data;
-@property (nonatomic) BOOL showAvatar;
+@property (nonatomic, readonly) BOOL showAvatar;
+
++ (SGBubbleTableViewContentCell *)cellWithDirection:(SGBubbleDirection)direction avatar:(BOOL)showAvatar reuseIdentifier:(NSString *)reuseIdentifier;
+
+- (id)initWithAvatar:(BOOL)showAvatar reuseIdentifier:(NSString *)reuseIdentifier;
 
 @end
 

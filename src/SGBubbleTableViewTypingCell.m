@@ -16,6 +16,11 @@ static int const kSGBubbleTableViewTypingCellHeight = 31;
 
 @property (nonatomic, retain) UIImageView *typingImageView;
 
+- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
+- (UIImageView *)typingImageViewWithImage:(UIImage *)typingImage;
+- (CGFloat)bubbleOffsetXWithBubbleImage:(UIImage *)bubbleImage;
+- (UIImage *)bubbleImage;
+
 @end
 
 @implementation SGBubbleTableViewTypingCell
@@ -29,11 +34,11 @@ static int const kSGBubbleTableViewTypingCellHeight = 31;
 
     switch (direction) {
         case SGBubbleTypingDirectionLeft:
-            cell = [[SGBubbleTableViewTypingLeftCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+            cell = [[SGBubbleTableViewTypingLeftCell alloc] initWithReuseIdentifier:reuseIdentifier];
             break;
             
         case SGBubbleTypingDirectionRight:
-            cell = [[SGBubbleTableViewTypingRightCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+            cell = [[SGBubbleTableViewTypingRightCell alloc] initWithReuseIdentifier:reuseIdentifier];
             break;
             
         default:
@@ -48,71 +53,49 @@ static int const kSGBubbleTableViewTypingCellHeight = 31;
     return 40.0;
 }
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if (self)
     {
-        self.typingImageView = [[UIImageView alloc] init];
+        self.typingImageView = [self typingImageViewWithImage:[self bubbleImage]];
         [self addSubview:self.typingImageView];
 
         self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+
     return self;
 }
 
-//- (void)setType:(SGBubbleTypingDirection)value
-//{
-//    if (!self.typingImageView)
-//    {
-//        self.typingImageView = [[UIImageView alloc] init];
-//        [self addSubview:self.typingImageView];
-//    }
-//    
-//    self.selectionStyle = UITableViewCellSelectionStyleNone;
-//    
-//    UIImage *bubbleImage = nil;
-//    CGFloat x = 0;
-//    
-//    if (value == SGBubbleTypingDirectionRight)
-//    {
-//        bubbleImage = [UIImage imageNamed:@"typingMine.png"]; 
-//        x = self.frame.size.width - bubbleImage.size.width;
-//    }
-//    else
-//    {
-//        bubbleImage = [UIImage imageNamed:@"typingSomeone.png"]; 
-//        x = 0;
-//    }
-//
-//    self.typingImageView.image = bubbleImage;
-//    self.typingImageView.frame = CGRectMake(x,
-//                                            kSGBubbleTableViewTypingCellOffsetY,
-//                                            kSGBubbleTableViewTypingCellWidth,
-//                                            kSGBubbleTableViewTypingCellHeight);
-//}
+- (UIImageView *)typingImageViewWithImage:(UIImage *)typingImage
+{
+    UIImageView *typingImageView = [[UIImageView alloc] initWithImage:typingImage];
+    CGRect frame = typingImageView.frame;
+    frame.origin.x = [self bubbleOffsetXWithBubbleImage:typingImage];
+    frame.origin.y = kSGBubbleTableViewTypingCellOffsetY;
+    typingImageView.frame = frame;
+
+    return typingImageView;
+}
+
+- (CGFloat)bubbleOffsetXWithBubbleImage:(UIImage *)bubbleImage
+{
+    return 0;
+}
+
+- (UIImage *)bubbleImage
+{
+    return nil;
+}
 
 @end
 
+
 @implementation SGBubbleTableViewTypingLeftCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+- (UIImage *)bubbleImage
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-
-    if (self)
-    {
-        UIImage *bubbleImage = [UIImage imageNamed:@"typingSomeone.png"];
-        CGFloat x = 0;
-
-        self.typingImageView.image = bubbleImage;
-        self.typingImageView.frame = CGRectMake(x,
-                                                kSGBubbleTableViewTypingCellOffsetY,
-                                                kSGBubbleTableViewTypingCellWidth,
-                                                kSGBubbleTableViewTypingCellHeight);
-    }
-
-    return self;
+    return [UIImage imageNamed:@"typingSomeone.png"];
 }
 
 @end
@@ -120,23 +103,14 @@ static int const kSGBubbleTableViewTypingCellHeight = 31;
 
 @implementation SGBubbleTableViewTypingRightCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+- (UIImage *)bubbleImage
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    
-    if (self)
-    {
-        UIImage *bubbleImage = [UIImage imageNamed:@"typingMine.png"];
-        CGFloat x = self.frame.size.width - bubbleImage.size.width;
-        
-        self.typingImageView.image = bubbleImage;
-        self.typingImageView.frame = CGRectMake(x,
-                                                kSGBubbleTableViewTypingCellOffsetY,
-                                                kSGBubbleTableViewTypingCellWidth,
-                                                kSGBubbleTableViewTypingCellHeight);
-    }
-    
-    return self;
+    return [UIImage imageNamed:@"typingMine.png"];
+}
+
+- (CGFloat)bubbleOffsetXWithBubbleImage:(UIImage *)bubbleImage
+{
+    return self.frame.size.width - bubbleImage.size.width;
 }
 
 @end

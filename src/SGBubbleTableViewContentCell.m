@@ -24,7 +24,7 @@
 - (CGFloat)bubbleImageViewFrameY;
 - (CGFloat)totalAvatarWidth;
 
-- (UIImageView *)configureAvatarImageViewWithImage:(UIImage *)avatarImage;
+- (UIImageView *)avatarImageViewWithImage:(UIImage *)avatarImage;
 - (void)setupInternalData;
 
 @end
@@ -35,23 +35,42 @@ static CGFloat kSGBubbleTableViewContentCellAvatarHeight = 50;
 
 @implementation SGBubbleTableViewContentCell
 
-+ (SGBubbleTableViewContentCell *)cellWithDirection:(SGBubbleDirection)direction reuseIdentifier:(NSString *)reuseIdentifier
++ (SGBubbleTableViewContentCell *)cellWithDirection:(SGBubbleDirection)direction avatar:(BOOL)showAvatar reuseIdentifier:(NSString *)reuseIdentifier
 {
     SGBubbleTableViewContentCell *cell = nil;
 
     switch (direction) {
         case SGBubbleDirectionLeft:
-            cell = [[SGBubbleTableViewContentCellLeft alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+            cell = [[SGBubbleTableViewContentCellLeft alloc] initWithAvatar:showAvatar reuseIdentifier:reuseIdentifier];
             break;
         case SGBubbleDirectionRight:
-            cell = [[SGBubbleTableViewContentCellRight alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+            cell = [[SGBubbleTableViewContentCellRight alloc] initWithAvatar:showAvatar reuseIdentifier:reuseIdentifier];
             break;
-            
+
         default:
             break;
     }
 
     return cell;
+}
+
+- (id)initWithAvatar:(BOOL)showAvatar reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+
+    if (self)
+    {
+        _showAvatar = showAvatar;
+
+        if (self.showAvatar)
+        {
+            UIImage *defaultAvatarImage = [UIImage imageNamed:@"missingAvatar.png"];
+            self.avatarImageView = [self avatarImageViewWithImage:defaultAvatarImage];
+            [self addSubview:self.avatarImageView];
+        }
+    }
+
+    return self;
 }
 
 - (void)setFrame:(CGRect)frame
@@ -92,11 +111,9 @@ static CGFloat kSGBubbleTableViewContentCellAvatarHeight = 50;
 
     if (self.showAvatar)
     {
-        [self.avatarImageView removeFromSuperview];
         UIImage *avatarImage = self.data.avatarImage ?: [UIImage imageNamed:@"missingAvatar.png"];
-        self.avatarImageView = [self configureAvatarImageViewWithImage:avatarImage];
+        self.avatarImageView.image = avatarImage;
         self.avatarImageView.frame = [self avatarImageViewFrame];
-        [self addSubview:self.avatarImageView];
     }
 
     [self.customView removeFromSuperview];
@@ -105,7 +122,6 @@ static CGFloat kSGBubbleTableViewContentCellAvatarHeight = 50;
                                        [self bubbleImageViewFrameY] + self.data.insets.top,
                                        [self.data contentWidth],
                                        [self.data contentHeight]);
-
     [self.contentView addSubview:self.customView];
 
     self.bubbleImageView.image = [self bubbleImage];
@@ -120,7 +136,7 @@ static CGFloat kSGBubbleTableViewContentCellAvatarHeight = 50;
     return self.frame.size.height - kSGBubbleTableViewContentCellAvatarHeight;
 }
 
-- (UIImageView *)configureAvatarImageViewWithImage:(UIImage *)avatarImage
+- (UIImageView *)avatarImageViewWithImage:(UIImage *)avatarImage
 {
     UIImageView *avatarImageView = [[UIImageView alloc] initWithImage:avatarImage];
 #if !__has_feature(objc_arc)
