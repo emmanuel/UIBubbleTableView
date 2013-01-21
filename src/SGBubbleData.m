@@ -33,8 +33,11 @@
 
 #pragma mark - Text bubble
 
-const UIEdgeInsets textInsetsMine = {5, 10, 11, 17};
-const UIEdgeInsets textInsetsSomeone = {5, 15, 11, 10};
+const UIEdgeInsets kSGBubbleDataTextInsetsRight = {5, 10, 11, 17};
+const UIEdgeInsets kSGBubbleDataTextInsetsLeft = {5, 15, 11, 10};
+const UIEdgeInsets kSGBubbleDataImageInsetsRight = {11, 13, 16, 22};
+const UIEdgeInsets kSGBubbleDataImageInsetsLeft = {11, 18, 16, 14};
+
 const NSInteger kMaxContentWidth = 200;
 const NSInteger kMaxContentHeight = 9999;
 
@@ -66,14 +69,11 @@ const NSInteger kMaxContentHeight = 9999;
     [label autorelease];
 #endif
     
-    UIEdgeInsets insets = (direction == SGBubbleDirectionRight ? textInsetsMine : textInsetsSomeone);
+    UIEdgeInsets insets = (direction == SGBubbleDirectionLeft ? kSGBubbleDataTextInsetsLeft : kSGBubbleDataTextInsetsRight);
     return [self initWithView:label date:date direction:direction insets:insets];
 }
 
 #pragma mark - Image bubble
-
-const UIEdgeInsets imageInsetsMine = {11, 13, 16, 22};
-const UIEdgeInsets imageInsetsSomeone = {11, 18, 16, 14};
 
 + (id)dataWithImage:(UIImage *)image date:(NSDate *)date direction:(SGBubbleDirection)direction
 {
@@ -102,7 +102,7 @@ const UIEdgeInsets imageInsetsSomeone = {11, 18, 16, 14};
     [imageView autorelease];
 #endif
     
-    UIEdgeInsets insets = (direction == SGBubbleDirectionRight ? imageInsetsMine : imageInsetsSomeone);
+    UIEdgeInsets insets = (direction == SGBubbleDirectionRight ? kSGBubbleDataImageInsetsRight : kSGBubbleDataImageInsetsLeft);
     return [self initWithView:imageView date:date direction:direction insets:insets];       
 }
 
