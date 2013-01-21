@@ -28,16 +28,16 @@ static int const kSGBubbleTableViewTypingCellHeight = 31;
 @synthesize typingImageView = _typingImageView;
 @synthesize showAvatar = _showAvatar;
 
-+ (SGBubbleTableViewTypingCell *)cellWithDirection:(SGBubbleTypingDirection)direction reuseIdentifier:(NSString *)reuseIdentifier
++ (SGBubbleTableViewTypingCell *)cellWithDirection:(SGBubbleDirection)direction reuseIdentifier:(NSString *)reuseIdentifier
 {
     Class cellFactory = nil;
 
     switch (direction) {
-        case SGBubbleTypingDirectionLeft:
+        case SGBubbleDirectionLeft:
             cellFactory = [SGBubbleTableViewTypingLeftCell class];
             break;
             
-        case SGBubbleTypingDirectionRight:
+        case SGBubbleDirectionRight:
             cellFactory = [SGBubbleTableViewTypingRightCell class];
             break;
             

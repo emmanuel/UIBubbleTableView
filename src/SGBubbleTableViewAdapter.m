@@ -161,11 +161,26 @@
     NSString *cellID = self.typingBubble == SGBubbleTypingDirectionLeft ? cellIDLeft : cellIDRight;
     SGBubbleTableViewTypingCell *cell = [bubbleTableView dequeueReusableCellWithIdentifier:cellID];
 
-    if (cell == nil) cell = [SGBubbleTableViewTypingCell cellWithDirection:self.typingBubble reuseIdentifier:cellID];
+    if (cell == nil) cell = [SGBubbleTableViewTypingCell cellWithDirection:[self typingBubbleDirection] reuseIdentifier:cellID];
 
     cell.showAvatar = self.showAvatars;
     
     return cell;
+}
+
+- (SGBubbleDirection)typingBubbleDirection
+{
+    switch (self.typingBubble) {
+        case SGBubbleTypingDirectionLeft:
+            return SGBubbleDirectionLeft;
+            break;
+        case SGBubbleTypingDirectionRight:
+            return SGBubbleDirectionRight;
+            break;
+            
+        default:
+            break;
+    }
 }
 
 #pragma mark - UITableViewDelegate implementations
