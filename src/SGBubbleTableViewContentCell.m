@@ -37,21 +37,21 @@ static CGFloat kSGBubbleTableViewContentCellAvatarHeight = 50;
 
 + (SGBubbleTableViewContentCell *)cellWithDirection:(SGBubbleDirection)direction avatar:(BOOL)showAvatar reuseIdentifier:(NSString *)reuseIdentifier
 {
-    SGBubbleTableViewContentCell *cell = nil;
+    Class cellFactory = nil;
 
     switch (direction) {
         case SGBubbleDirectionLeft:
-            cell = [[SGBubbleTableViewContentCellLeft alloc] initWithAvatar:showAvatar reuseIdentifier:reuseIdentifier];
+            cellFactory = [SGBubbleTableViewContentCellLeft class];
             break;
         case SGBubbleDirectionRight:
-            cell = [[SGBubbleTableViewContentCellRight alloc] initWithAvatar:showAvatar reuseIdentifier:reuseIdentifier];
+            cellFactory = [SGBubbleTableViewContentCellRight class];
             break;
 
         default:
             break;
     }
 
-    return cell;
+    return [[cellFactory alloc] initWithAvatar:showAvatar reuseIdentifier:reuseIdentifier];
 }
 
 - (id)initWithAvatar:(BOOL)showAvatar reuseIdentifier:(NSString *)reuseIdentifier

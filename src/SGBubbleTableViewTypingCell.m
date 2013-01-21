@@ -30,22 +30,22 @@ static int const kSGBubbleTableViewTypingCellHeight = 31;
 
 + (SGBubbleTableViewTypingCell *)cellWithDirection:(SGBubbleTypingDirection)direction reuseIdentifier:(NSString *)reuseIdentifier
 {
-    SGBubbleTableViewTypingCell *cell = nil;
+    Class cellFactory = nil;
 
     switch (direction) {
         case SGBubbleTypingDirectionLeft:
-            cell = [[SGBubbleTableViewTypingLeftCell alloc] initWithReuseIdentifier:reuseIdentifier];
+            cellFactory = [SGBubbleTableViewTypingLeftCell class];
             break;
             
         case SGBubbleTypingDirectionRight:
-            cell = [[SGBubbleTableViewTypingRightCell alloc] initWithReuseIdentifier:reuseIdentifier];
+            cellFactory = [SGBubbleTableViewTypingRightCell class];
             break;
             
         default:
             break;
     }
 
-    return cell;
+    return [[cellFactory alloc] initWithReuseIdentifier:reuseIdentifier];
 }
 
 + (CGFloat)height
