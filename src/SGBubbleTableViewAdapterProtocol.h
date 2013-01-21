@@ -9,17 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "SGBubbleTableViewDataSource.h"
 
-#ifndef NS_ENUM
-#define NS_ENUM(_type, _name) enum _name : _type _name; enum _name : _type
-#endif
-
-typedef NS_ENUM(NSInteger, SGBubbleTypingDirection)
-{
-    SGBubbleTypingDirectionNone,
-    SGBubbleTypingDirectionRight,
-    SGBubbleTypingDirectionLeft,
-};
-
 @protocol SGBubbleTableViewAdapterProtocol <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, weak) id<UITableViewDelegate> delegate;

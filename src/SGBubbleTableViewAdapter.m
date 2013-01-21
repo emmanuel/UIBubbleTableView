@@ -15,7 +15,8 @@
 
 @interface SGBubbleTableViewAdapter ()
 
-@property (nonatomic) SGBubbleTypingDirection typingBubble;
+@property (nonatomic) BOOL showTypingBubble;
+@property (nonatomic) SGBubbleDirection typingBubbleDirection;
 
 @end
 
@@ -77,7 +78,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     int result = [self.bubbleSections count];
-    if (SGBubbleTypingDirectionNone != self.typingBubble) result++;
+    if (self.showTypingBubble) result++;
 
     return result;
 }
@@ -158,29 +159,14 @@
     }
     static NSString * const cellIDLeft = @"tblBubbleTypingCellLeft";
     static NSString * const cellIDRight = @"tblBubbleTypingCellRight";
-    NSString *cellID = self.typingBubble == SGBubbleTypingDirectionLeft ? cellIDLeft : cellIDRight;
+    NSString *cellID = SGBubbleDirectionLeft == self.typingBubbleDirection ? cellIDLeft : cellIDRight;
     SGBubbleTableViewTypingCell *cell = [bubbleTableView dequeueReusableCellWithIdentifier:cellID];
 
-    if (cell == nil) cell = [SGBubbleTableViewTypingCell cellWithDirection:[self typingBubbleDirection] reuseIdentifier:cellID];
+    if (cell == nil) cell = [SGBubbleTableViewTypingCell cellWithDirection:self.typingBubbleDirection reuseIdentifier:cellID];
 
     cell.showAvatar = self.showAvatars;
     
     return cell;
-}
-
-- (SGBubbleDirection)typingBubbleDirection
-{
-    switch (self.typingBubble) {
-        case SGBubbleTypingDirectionLeft:
-            return SGBubbleDirectionLeft;
-            break;
-        case SGBubbleTypingDirectionRight:
-            return SGBubbleDirectionRight;
-            break;
-            
-        default:
-            break;
-    }
 }
 
 #pragma mark - UITableViewDelegate implementations
@@ -265,27 +251,13 @@
 
 - (void)hideTypingBubble
 {
-    self.typingBubble = SGBubbleTypingDirectionNone;
+    self.showTypingBubble = NO;
 }
 
 - (void)showTypingBubbleWithDirection:(SGBubbleDirection)direction
 {
-    SGBubbleTypingDirection typingDirection;
-
-    switch (direction) {
-        case SGBubbleDirectionLeft:
-            typingDirection = SGBubbleTypingDirectionLeft;
-            break;
-        case SGBubbleDirectionRight:
-            typingDirection = SGBubbleTypingDirectionRight;
-            break;
-
-        default:
-            typingDirection = SGBubbleTypingDirectionNone;
-            break;
-    }
-
-    self.typingBubble = typingDirection;
+    self.showTypingBubble = YES;
+    self.typingBubbleDirection = direction;
 }
 
 @end
