@@ -24,7 +24,6 @@
 - (CGFloat)bubbleImageViewFrameY;
 - (CGFloat)totalAvatarWidth;
 
-- (UIImageView *)avatarImageViewWithImage:(UIImage *)avatarImage;
 - (void)setupInternalData;
 
 @end
@@ -64,13 +63,21 @@ static CGFloat kSGBubbleTableViewContentCellAvatarHeight = 50;
 
         if (self.showAvatar)
         {
-            UIImage *defaultAvatarImage = [UIImage imageNamed:@"missingAvatar.png"];
-            self.avatarImageView = [self avatarImageViewWithImage:defaultAvatarImage];
+            self.avatarImageView = [[UIImageView alloc] initWithImage:[self defaultAvatarImage]];
+#if !__has_feature(objc_arc)
+            [self.avatarImageView autorelease];
+#endif
+            [self configureAvatarImageView];
             [self addSubview:self.avatarImageView];
         }
     }
 
     return self;
+}
+
+- (UIImage *)defaultAvatarImage
+{
+    return [UIImage imageNamed:@"missingAvatar.png"];
 }
 
 - (void)setFrame:(CGRect)frame
@@ -111,7 +118,7 @@ static CGFloat kSGBubbleTableViewContentCellAvatarHeight = 50;
 
     if (self.showAvatar)
     {
-        UIImage *avatarImage = self.data.avatarImage ?: [UIImage imageNamed:@"missingAvatar.png"];
+        UIImage *avatarImage = self.data.avatarImage ?: [self defaultAvatarImage];
         self.avatarImageView.image = avatarImage;
         self.avatarImageView.frame = [self avatarImageViewFrame];
     }
@@ -138,18 +145,12 @@ static CGFloat kSGBubbleTableViewContentCellAvatarHeight = 50;
     return self.frame.size.height - kSGBubbleTableViewContentCellAvatarHeight;
 }
 
-- (UIImageView *)avatarImageViewWithImage:(UIImage *)avatarImage
+- (void)configureAvatarImageView
 {
-    UIImageView *avatarImageView = [[UIImageView alloc] initWithImage:avatarImage];
-#if !__has_feature(objc_arc)
-    [avatarImageView autorelease];
-#endif
-    avatarImageView.layer.cornerRadius = 9.0;
-    avatarImageView.layer.masksToBounds = YES;
-    avatarImageView.layer.borderColor = [UIColor colorWithWhite:0.0 alpha:0.2].CGColor;
-    avatarImageView.layer.borderWidth = 1.0;
-
-    return avatarImageView;
+    self.avatarImageView.layer.cornerRadius = 9.0;
+    self.avatarImageView.layer.masksToBounds = YES;
+    self.avatarImageView.layer.borderColor = [UIColor colorWithWhite:0.0 alpha:0.2].CGColor;
+    self.avatarImageView.layer.borderWidth = 1.0;
 }
 
 - (CGFloat)totalAvatarWidth
@@ -197,8 +198,6 @@ static CGFloat kSGBubbleTableViewContentCellAvatarHeight = 50;
 - (UIImage *)bubbleImage
 {
     return [[UIImage imageNamed:@"bubbleSomeone.png"] stretchableImageWithLeftCapWidth:21 topCapHeight:14];
-//    TODO: switch to -resizableImageWithCapInsets:
-//    return [[UIImage imageNamed:@"bubbleSomeone.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(14, 21, 0, 0)];
 }
 
 - (CGFloat)bubbleImageViewFrameX
