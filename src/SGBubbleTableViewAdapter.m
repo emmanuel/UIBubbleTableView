@@ -184,7 +184,7 @@
     else
     {
         SGBubbleData *data = self.bubbleSections[indexPath.section][indexPath.row - 1];
-        return MAX([data totalHeight], self.showAvatars ? 52 : 0);
+        return MAX([data totalSize].height, self.showAvatars ? 52 : 0);
     }
 }
 

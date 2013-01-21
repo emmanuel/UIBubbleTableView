@@ -134,24 +134,17 @@ const UIEdgeInsets imageInsetsSomeone = {11, 18, 16, 14};
     return self;
 }
 
-- (CGFloat)contentWidth
+- (CGSize)contentSize
 {
-    return self.view.frame.size.width;
+    return self.view.frame.size;
 }
 
-- (CGFloat)contentHeight
+- (CGSize)totalSize
 {
-    return self.view.frame.size.height;
-}
-
-- (CGFloat)totalWidth
-{
-    return [self contentWidth] + self.insets.left + self.insets.right;
-}
-
-- (CGFloat)totalHeight
-{
-    return [self contentHeight] + self.insets.top + self.insets.bottom;
+    CGSize contentSize = [self contentSize];
+    UIEdgeInsets insets = self.insets;
+    return CGSizeMake(contentSize.width + insets.left + insets.right,
+                      contentSize.height + insets.top + insets.bottom);
 }
 
 @end

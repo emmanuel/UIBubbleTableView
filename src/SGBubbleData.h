@@ -37,9 +37,7 @@ typedef NS_ENUM(NSInteger, SGBubbleDirection)
 - (id)initWithImage:(UIImage *)image date:(NSDate *)date direction:(SGBubbleDirection)direction;
 - (id)initWithView:(UIView *)view date:(NSDate *)date direction:(SGBubbleDirection)direction insets:(UIEdgeInsets)insets;
 
-- (CGFloat)contentWidth;
-- (CGFloat)contentHeight;
-- (CGFloat)totalWidth;
-- (CGFloat)totalHeight;
+- (CGSize)contentSize;
+- (CGSize)totalSize;
 
 @end

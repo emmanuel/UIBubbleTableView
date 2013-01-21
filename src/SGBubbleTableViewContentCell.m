@@ -118,17 +118,19 @@ static CGFloat kSGBubbleTableViewContentCellAvatarHeight = 50;
 
     [self.customView removeFromSuperview];
     self.customView = self.data.view;
+    CGSize customViewSize = [self.data contentSize];
     self.customView.frame = CGRectMake([self bubbleImageViewFrameX] + self.data.insets.left,
                                        [self bubbleImageViewFrameY] + self.data.insets.top,
-                                       [self.data contentWidth],
-                                       [self.data contentHeight]);
+                                       customViewSize.width,
+                                       customViewSize.height);
     [self.contentView addSubview:self.customView];
 
     self.bubbleImageView.image = [self bubbleImage];
+    CGSize bubbleContentViewSize = [self.data totalSize];
     self.bubbleImageView.frame = CGRectMake([self bubbleImageViewFrameX],
                                             [self bubbleImageViewFrameY],
-                                            [self.data totalWidth],
-                                            [self.data totalHeight]);
+                                            bubbleContentViewSize.width,
+                                            bubbleContentViewSize.height);
 }
 
 - (CGFloat)avatarOffsetY
@@ -171,7 +173,7 @@ static CGFloat kSGBubbleTableViewContentCellAvatarHeight = 50;
     CGFloat y = 0;
     if (self.showAvatar)
     {
-        CGFloat delta = self.frame.size.height - [self.data totalHeight];
+        CGFloat delta = self.frame.size.height - [self.data totalSize].height;
         if (delta > 0) y = delta;
     }
     
@@ -223,7 +225,7 @@ static CGFloat kSGBubbleTableViewContentCellAvatarHeight = 50;
 
 - (CGFloat)bubbleImageViewFrameX
 {
-    return self.frame.size.width - [self.data totalWidth] - [self totalAvatarWidth];
+    return self.frame.size.width - [self.data totalSize].width - [self totalAvatarWidth];
 }
 
 - (CGRect)avatarImageViewFrame
