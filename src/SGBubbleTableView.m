@@ -118,7 +118,6 @@
 @dynamic bubbleDataSource;
 @dynamic snapInterval;
 @dynamic showAvatars;
-@dynamic typingBubble;
 
 - (void)reloadData
 {
@@ -152,7 +151,7 @@
     {
         return self.adapter;
     }
-    else if ((aSelector == @selector(typingBubble)) || (aSelector == @selector(setTypingBubble:)))
+    else if ((aSelector == @selector(hideTypingBubble)) || (aSelector == @selector(showTypingBubbleWithDirection:)))
     {
         return self.adapter;
     }
@@ -176,7 +175,7 @@
     {
         return YES;
     }
-    else if ((aSelector == @selector(typingBubble)) || (aSelector == @selector(setTypingBubble:)))
+    else if ((aSelector == @selector(hideTypingBubble)) ||(aSelector == @selector(showTypingBubbleWithDirection:)))
     {
         return YES;
     }

@@ -26,7 +26,6 @@ typedef NS_ENUM(NSInteger, SGBubbleTypingDirection)
 @property (nonatomic, weak) id<SGBubbleTableViewDataSource> bubbleDataSource;
 
 @property (nonatomic, assign) NSTimeInterval snapInterval;
-@property (nonatomic, assign) SGBubbleTypingDirection typingBubble;
 @property (nonatomic, assign) BOOL showAvatars;
 
 @required

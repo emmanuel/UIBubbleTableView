@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SGBubbleData.h"
 #import "SGBubbleTableViewDataSource.h"
 #import "SGBubbleTableViewAdapterProtocol.h"
 
@@ -16,7 +17,6 @@
 @property (nonatomic, assign) id<SGBubbleTableViewDataSource> bubbleDataSource;
 
 @property (nonatomic, assign) NSTimeInterval snapInterval;
-@property (nonatomic, assign) SGBubbleTypingDirection typingBubble;
 @property (nonatomic, assign) BOOL showAvatars;
 
 @property (nonatomic, assign) SGBubbleTableView *bubbleTableView;
@@ -29,5 +29,8 @@
 - (void)willReloadData;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
+
+- (void)hideTypingBubble;
+- (void)showTypingBubbleWithDirection:(SGBubbleDirection)direction;
 
 @end

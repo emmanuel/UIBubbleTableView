@@ -15,6 +15,8 @@
 
 @interface SGBubbleTableViewAdapter ()
 
+@property (nonatomic) SGBubbleTypingDirection typingBubble;
+
 @end
 
 @implementation SGBubbleTableViewAdapter
@@ -37,7 +39,7 @@
         [self.bubbleSections autorelease];
 #endif
         self.snapInterval = 120;
-        self.typingBubble = SGBubbleTypingDirectionNone;
+        [self hideTypingBubble];
     }
 
     return self;
@@ -244,6 +246,31 @@
             last = data.date;
         }
     }
+}
+
+- (void)hideTypingBubble
+{
+    self.typingBubble = SGBubbleTypingDirectionNone;
+}
+
+- (void)showTypingBubbleWithDirection:(SGBubbleDirection)direction
+{
+    SGBubbleTypingDirection typingDirection;
+
+    switch (direction) {
+        case SGBubbleDirectionLeft:
+            typingDirection = SGBubbleTypingDirectionLeft;
+            break;
+        case SGBubbleDirectionRight:
+            typingDirection = SGBubbleTypingDirectionRight;
+            break;
+
+        default:
+            typingDirection = SGBubbleTypingDirectionNone;
+            break;
+    }
+
+    self.typingBubble = typingDirection;
 }
 
 @end
